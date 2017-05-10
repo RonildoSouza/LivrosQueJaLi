@@ -8,8 +8,8 @@ namespace LivrosQueJaLi.Models.Entities
     {
         public string IdUser { get; set; }
         public string IdBook { get; set; }
-        public int Read { get; set; }
-        public int Wish { get; set; }
+        public bool IsRead { get; set; }
+        public bool IsWish { get; set; }
 
         [JsonIgnore]
         public Book Book { get; set; }

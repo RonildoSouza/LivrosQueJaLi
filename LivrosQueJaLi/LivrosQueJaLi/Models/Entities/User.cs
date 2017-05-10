@@ -6,6 +6,6 @@ namespace LivrosQueJaLi.Models.Entities
     public class User : BaseEntity
     {
         public string IdFacebook { get; set; }
-        public string Name { get; set; }
+        public string UserName { get; set; }
     }
 }

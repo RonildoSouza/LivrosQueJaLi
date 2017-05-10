@@ -28,8 +28,8 @@ namespace TesteLivrosQueJaLi.Services
         {
             var str = await _client.GetBookForId("asdfasdfasdf");
 
-            //Assert.IsNull(str);
-            Assert.AreEqual("{}", str.Trim());
+            Assert.IsNull(str);
+            //Assert.AreEqual("{}", str.Trim());
         }
 
         [TestCase]
