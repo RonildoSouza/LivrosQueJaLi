@@ -41,7 +41,7 @@ namespace LivrosQueJaLi.Services
             return responseString;
         }
 
-        public async Task<string> GetBooksSearch(string pSearchTerm = "\"\"")
+        public async Task<string> GetBooks(string pSearchTerm = "\"\"")
         {
             string responseString = null;
             var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=totalItems,items(id,volumeInfo/title," +

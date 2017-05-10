@@ -7,21 +7,28 @@ namespace LivrosQueJaLi.Services
     {
         private const string MobileAppUri = "";
         private IMobileServiceClient _client;
+
         private IMobileServiceTable<T> _table;
-
-        public IMobileServiceTable<T> GetTable()
+        public IMobileServiceTable<T> Table
         {
-            try
+            get
             {
-                _client = new MobileServiceClient(MobileAppUri);
-                _table = _client.GetTable<T>();
-            }
-            catch (MobileServiceConflictException e)
-            {
-                Debug.WriteLine(e.Message);
-            }
+                try
+                {
+                    _table = _client.GetTable<T>();
+                }
+                catch (MobileServiceConflictException e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
 
-            return _table;
+                return _table;
+            }
+        }
+
+        public AzureClient()
+        {
+            _client = new MobileServiceClient(MobileAppUri);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchSemParametro()
         {
-            var str = await _client.GetBooksSearch();
+            var str = await _client.GetBooks();
 
             Assert.IsNotNull(str);
         }
@@ -43,7 +43,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchComParametroSemEspaco()
         {
-            var str = await _client.GetBooksSearch("Xamarin");
+            var str = await _client.GetBooks("Xamarin");
 
             Assert.IsNotNull(str);
         }
@@ -51,7 +51,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchComParametroComEspaco()
         {
-            var str = await _client.GetBooksSearch("Xamarin Forms");
+            var str = await _client.GetBooks("Xamarin Forms");
 
             Assert.IsNotNull(str);
         }
