@@ -18,42 +18,41 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBookForIdValido()
         {
-            var str = await _client.GetBookForId("N0T0CgAAQBAJ");
+            var book = await _client.GetBookForId("N0T0CgAAQBAJ");
 
-            Assert.IsNotNull(str);
+            Assert.IsNotNull(book);
         }
 
         [TestCase]
         public async Task TesteGetBookForIdInvalido()
         {
-            var str = await _client.GetBookForId("asdfasdfasdf");
+            var book = await _client.GetBookForId("asdfasdfasdf");
 
-            Assert.IsNull(str);
-            //Assert.AreEqual("{}", str.Trim());
+            Assert.IsNull(book);
         }
 
         [TestCase]
         public async Task TesteGetBooksSearchSemParametro()
         {
-            var str = await _client.GetBooks();
+            var book = await _client.GetBooks();
 
-            Assert.IsNotNull(str);
+            Assert.IsNotNull(book);
         }
 
         [TestCase]
         public async Task TesteGetBooksSearchComParametroSemEspaco()
         {
-            var str = await _client.GetBooks("Xamarin");
+            var book = await _client.GetBooks("a");
 
-            Assert.IsNotNull(str);
+            Assert.IsNotNull(book);
         }
 
         [TestCase]
         public async Task TesteGetBooksSearchComParametroComEspaco()
         {
-            var str = await _client.GetBooks("Xamarin Forms");
+            var book = await _client.GetBooks("Xamarin Forms");
 
-            Assert.IsNotNull(str);
+            Assert.IsNotNull(book);
         }
     }
 }

@@ -42,7 +42,6 @@
     <Compile Include="DAL\IBaseDAL.cs" />
     <Compile Include="DAL\UserBookDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
-    <Compile Include="Helpers\BookConverter.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
     <Compile Include="Models\Entities\User.cs" />

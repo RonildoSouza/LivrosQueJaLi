@@ -1,4 +1,5 @@
 ﻿using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,36 @@ namespace LivrosQueJaLi.DAL
 {
     public class CommentDAL : IBaseDAL<Comment>
     {
-        public void InsertOrUpdate(Comment obj)
+        private AzureClient<Comment> _azureClient;
+
+        public CommentDAL()
         {
-            throw new NotImplementedException();
+            _azureClient = new AzureClient<Comment>();
         }
 
-        public Comment SelectById(string pId)
+        public async void InsertOrUpdate(Comment obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _azureClient.Table().InsertAsync(obj);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public List<Comment> SelectBookComments(string pIdBook)
+        /// <summary>
+        /// NÃO IMPLEMENTADO
+        /// </summary>
+        /// <param name="pId"></param>
+        /// <returns></returns>
+        public Comment SelectById(string pId) => throw new NotImplementedException();
+
+        public async Task<List<Comment>> SelectBookComments(string pIdBook)
         {
-            return null;
+            var comments = await _azureClient.Table().Where(c => c.IdBook == pIdBook).ToListAsync();
+            return comments;
         }
     }
 }

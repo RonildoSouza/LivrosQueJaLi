@@ -1,4 +1,5 @@
 ﻿using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,29 @@ namespace LivrosQueJaLi.DAL
 {
     public class UserDAL : IBaseDAL<User>
     {
-        public void InsertOrUpdate(User obj)
+        private AzureClient<User> _azureClient;
+
+        public UserDAL()
         {
-            throw new NotImplementedException();
+            _azureClient = new AzureClient<User>();
+        }
+        public async void InsertOrUpdate(User obj)
+        {
+            try
+            {
+                await _azureClient.Table().InsertAsync(obj);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public User SelectById(string pId)
         {
-            throw new NotImplementedException();
+            //var usr = _azureClient.Table.Where(u => u.Id == pId);
+            return null;
         }
     }
 }

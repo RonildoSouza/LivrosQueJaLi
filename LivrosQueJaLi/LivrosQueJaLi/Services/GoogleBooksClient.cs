@@ -7,7 +7,6 @@ using System.Net.Http;
 using LivrosQueJaLi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using LivrosQueJaLi.Helpers;
 
 namespace LivrosQueJaLi.Services
 {
@@ -15,7 +14,6 @@ namespace LivrosQueJaLi.Services
     {
         private const string UrlGoogleBooksAPI = "https://www.googleapis.com/books/v1/volumes";
         private HttpClient _client;
-        private Book _book = new Book();
 
         public GoogleBooksClient()
         {
@@ -24,10 +22,8 @@ namespace LivrosQueJaLi.Services
 
         public async Task<Book> GetBookForId(string pIdBook)
         {
+            Book book = null;
             var url = $"{UrlGoogleBooksAPI}/{pIdBook}";
-            //var url = $"{UrlGoogleBooksAPI}?q=id:{pIdBook}&fields=items(id,volumeInfo/title," +
-            //    $"volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publisher,volumeInfo/publishedDate," +
-            //    $"volumeInfo/description,volumeInfo/pageCount,volumeInfo/imageLinks/thumbnail,volumeInfo/language)";
 
             try
             {
@@ -35,9 +31,9 @@ namespace LivrosQueJaLi.Services
                 {
                     if (response.IsSuccessStatusCode)
                     {
+                        book = new Book();
                         var responseString = await response.Content.ReadAsStringAsync();
-
-                        _book = JsonConvert.DeserializeObject<Book>(responseString, new BookConverter());
+                        book = JsonConvert.DeserializeObject<Book>(responseString);
                     }
                 }
             }
@@ -46,15 +42,16 @@ namespace LivrosQueJaLi.Services
                 throw new Exception(e.Message);
             }
 
-            return _book;
+            return book;
         }
 
-        public async Task<List<Book>> GetBooks(string pSearchTerm = "\"\"")
+        public async Task<List<Book>> GetBooks(string pSearchTerm = "\"\"", int pStartIndex = 0)
         {
-            var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=totalItems,items(id,volumeInfo/title," +
+            List<Book> books = null;
+            var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=items(id,volumeInfo/title," +
                 $"volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publisher,volumeInfo/publishedDate," +
                 $"volumeInfo/description,volumeInfo/pageCount,volumeInfo/imageLinks/thumbnail,volumeInfo/language)" +
-                $"&maxResults=40&startIndex=0";
+                $"&maxResults=40&startIndex={pStartIndex}";
 
             try
             {
@@ -62,7 +59,12 @@ namespace LivrosQueJaLi.Services
                 {
                     if (response.IsSuccessStatusCode)
                     {
+                        books = new List<Book>();
                         var responseString = await response.Content.ReadAsStringAsync();
+                        var array = JObject.Parse(responseString).SelectToken("items").ToArray();
+
+                        for (int i = 0; i < array.Length; i++)
+                            books.Add(JsonConvert.DeserializeObject<Book>(array[i].ToString()));
                     }
                 }
             }
@@ -71,7 +73,7 @@ namespace LivrosQueJaLi.Services
                 throw new Exception(e.Message);
             }
 
-            return null;
+            return books;
         }
     }
 }
