@@ -1,7 +1,6 @@
 ﻿using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Models.Entities;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
 
 namespace TesteLivrosQueJaLi.DAL
@@ -17,18 +16,26 @@ namespace TesteLivrosQueJaLi.DAL
             _userDAL = new UserDAL();
         }
 
-        [TestCase]
-        public void InsertCommentValido()
+        [TestCase, Ignore("Está anulando a thread do azure")]
+        public void InsertUser()
         {
             var usr = new User()
             {
-                IdFacebook = "efg456",
-                UserName = "Teste"
+                IdFacebook = "3666",
+                UserName = "Teste NUnit"
             };
 
             _userDAL.InsertOrUpdate(usr);
 
             Assert.IsTrue(true);
+        }
+
+        [TestCase]
+        public async Task SelectUserByIdFacebook()
+        {
+            var usr = await _userDAL.SelectByIdFacebookAsync("abc123");
+
+            Assert.IsNotNull(usr);
         }
     }
 }

@@ -1,27 +1,61 @@
 ﻿using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.DAL
 {
     public class UserBookDAL : IBaseDAL<UserBook>
     {
-        public void InsertOrUpdate(UserBook obj)
+        private AzureClient<UserBook> _azureClient;
+
+        public UserBookDAL() => _azureClient = new AzureClient<UserBook>();
+
+        public async void InsertOrUpdate(UserBook obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (obj.Id == null)
+                    await _azureClient.Table.InsertAsync(obj);
+                else
+                    await _azureClient.Table.UpdateAsync(obj);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public UserBook SelectById(string pId)
+        public async Task<UserBook> SelectUserBookByIds(string pIdUser, string pIdBook)
         {
-            throw new NotImplementedException();
+            var bk = await _azureClient.Table
+                .Where(b => b.IdUser == pIdUser && b.IdBook == pIdBook)
+                .ToListAsync();
+
+            return bk.FirstOrDefault();
         }
 
-        public List<UserBook> SelectUserBooks(string pIdUser, bool pWish = false)
+        public async Task<List<UserBook>> SelectUserBooksAsync(string pIdUser, bool pWish = false)
         {
-            return null;
+            List<UserBook> books = null;
+            var bks = await _azureClient.Table
+                .Where(b => b.IdUser == pIdUser
+                && b.IsWish == pWish && b.IsRead != pWish)
+                .ToListAsync();
+
+            if (bks != null || bks.Count > 0)
+            {
+                books = new List<UserBook>();
+                foreach (var book in bks)
+                {
+                    book.Book = await new GoogleBooksClient().GetBookByIdAsync(book.IdBook);
+                    books.Add(book);
+                }
+            }
+
+            return books;
         }
     }
 }

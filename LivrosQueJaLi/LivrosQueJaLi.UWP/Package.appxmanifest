@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="9c95168e-b9eb-408f-82b1-a7a8ac10436f"
-    Publisher="CN=Ronildo"
+    Name="fd8adbfa-a3ce-4326-b2b7-a8b073278d83"
+    Publisher="CN=User"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="9c95168e-b9eb-408f-82b1-a7a8ac10436f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="fd8adbfa-a3ce-4326-b2b7-a8b073278d83" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>LivrosQueJaLi.UWP</DisplayName>
-    <PublisherDisplayName>Ronildo</PublisherDisplayName>
+    <PublisherDisplayName>User</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

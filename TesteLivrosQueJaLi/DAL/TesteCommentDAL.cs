@@ -20,7 +20,7 @@ namespace TesteLivrosQueJaLi.DAL
         [TestCase]
         public async Task SelectBookCommentsComIdValido()
         {
-            var books = await _commentDAL.SelectBookComments("GmroDQAAQBAJ");
+            var books = await _commentDAL.SelectBookCommentsAsync("GmroDQAAQBAJ");
 
             Assert.IsTrue(books.Count != 0);
         }
@@ -28,12 +28,12 @@ namespace TesteLivrosQueJaLi.DAL
         [TestCase]
         public async Task SelectBookCommentsComIdInValido()
         {
-            var books = await _commentDAL.SelectBookComments("asdasdasdasdasdwdads");
+            var books = await _commentDAL.SelectBookCommentsAsync("asdasdasdasdasdwdads");
 
             Assert.IsTrue(books.Count == 0);
         }
 
-        [TestCase]
+        [TestCase, Ignore("Está anulando a thread do azure")]
         public void InsertCommentValido()
         {
             var com = new Comment()
@@ -51,7 +51,7 @@ namespace TesteLivrosQueJaLi.DAL
             Assert.IsTrue(true);
         }
 
-        [TestCase]
+        [TestCase, Ignore("Está anulando a thread do azure")]
         public void InsertCommentInValido()
         {
             _commentDAL.InsertOrUpdate(new Comment()

@@ -18,7 +18,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBookForIdValido()
         {
-            var book = await _client.GetBookForId("N0T0CgAAQBAJ");
+            var book = await _client.GetBookByIdAsync("N0T0CgAAQBAJ");
 
             Assert.IsNotNull(book);
         }
@@ -26,7 +26,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBookForIdInvalido()
         {
-            var book = await _client.GetBookForId("asdfasdfasdf");
+            var book = await _client.GetBookByIdAsync("asdfasdfasdf");
 
             Assert.IsNull(book);
         }
@@ -34,7 +34,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchSemParametro()
         {
-            var book = await _client.GetBooks();
+            var book = await _client.GetBooksAsync();
 
             Assert.IsNotNull(book);
         }
@@ -42,7 +42,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchComParametroSemEspaco()
         {
-            var book = await _client.GetBooks("a");
+            var book = await _client.GetBooksAsync("a");
 
             Assert.IsNotNull(book);
         }
@@ -50,7 +50,7 @@ namespace TesteLivrosQueJaLi.Services
         [TestCase]
         public async Task TesteGetBooksSearchComParametroComEspaco()
         {
-            var book = await _client.GetBooks("Xamarin Forms");
+            var book = await _client.GetBooksAsync("Xamarin Forms");
 
             Assert.IsNotNull(book);
         }

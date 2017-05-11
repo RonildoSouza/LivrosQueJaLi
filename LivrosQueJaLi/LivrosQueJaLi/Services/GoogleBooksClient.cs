@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using LivrosQueJaLi.Models;
@@ -20,7 +19,7 @@ namespace LivrosQueJaLi.Services
             _client = new HttpClient();
         }
 
-        public async Task<Book> GetBookForId(string pIdBook)
+        public async Task<Book> GetBookByIdAsync(string pIdBook)
         {
             Book book = null;
             var url = $"{UrlGoogleBooksAPI}/{pIdBook}";
@@ -45,7 +44,7 @@ namespace LivrosQueJaLi.Services
             return book;
         }
 
-        public async Task<List<Book>> GetBooks(string pSearchTerm = "\"\"", int pStartIndex = 0)
+        public async Task<IEnumerable<Book>> GetBooksAsync(string pSearchTerm = "\"\"", int pStartIndex = 0)
         {
             List<Book> books = null;
             var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=items(id,volumeInfo/title," +

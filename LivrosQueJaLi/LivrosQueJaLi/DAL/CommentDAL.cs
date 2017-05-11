@@ -2,8 +2,6 @@
 using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.DAL
@@ -12,16 +10,13 @@ namespace LivrosQueJaLi.DAL
     {
         private AzureClient<Comment> _azureClient;
 
-        public CommentDAL()
-        {
-            _azureClient = new AzureClient<Comment>();
-        }
+        public CommentDAL() => _azureClient = new AzureClient<Comment>();
 
         public async void InsertOrUpdate(Comment obj)
         {
             try
             {
-                await _azureClient.Table().InsertAsync(obj);
+                await _azureClient.Table.InsertAsync(obj);
             }
             catch (Exception e)
             {
@@ -29,16 +24,9 @@ namespace LivrosQueJaLi.DAL
             }
         }
 
-        /// <summary>
-        /// NÃO IMPLEMENTADO
-        /// </summary>
-        /// <param name="pId"></param>
-        /// <returns></returns>
-        public Comment SelectById(string pId) => throw new NotImplementedException();
-
-        public async Task<List<Comment>> SelectBookComments(string pIdBook)
+        public async Task<List<Comment>> SelectBookCommentsAsync(string pIdBook)
         {
-            var comments = await _azureClient.Table().Where(c => c.IdBook == pIdBook).ToListAsync();
+            var comments = await _azureClient.Table.Where(c => c.IdBook == pIdBook).ToListAsync();
             return comments;
         }
     }

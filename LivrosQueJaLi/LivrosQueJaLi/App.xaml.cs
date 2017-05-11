@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrosQueJaLi.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace LivrosQueJaLi
         {
             InitializeComponent();
 
-            MainPage = new LivrosQueJaLi.MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
