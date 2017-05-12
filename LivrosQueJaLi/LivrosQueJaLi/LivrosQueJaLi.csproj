@@ -51,7 +51,6 @@
     <Compile Include="Services\AzureClient.cs" />
     <Compile Include="Services\GoogleBooksClient.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\BookBaseViewModel.cs" />
     <Compile Include="ViewModels\BooksReadViewModel.cs" />
     <Compile Include="ViewModels\BookSearchViewModel.cs" />
     <Compile Include="ViewModels\BooksWishedViewModel.cs" />

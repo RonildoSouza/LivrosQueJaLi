@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrosQueJaLi.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace LivrosQueJaLi.Views
         public BooksWishedPage()
         {
             InitializeComponent();
+            BindingContext = new BooksWishedViewModel();
         }
     }
 }

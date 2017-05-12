@@ -21,6 +21,15 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
+        public BaseViewModel()
+        {
+            User = new User()
+            {
+                Id = "afb376f1-3198-49d8-83a5-b8a8e86ae741",
+                IdFacebook = "abc123"
+            };
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

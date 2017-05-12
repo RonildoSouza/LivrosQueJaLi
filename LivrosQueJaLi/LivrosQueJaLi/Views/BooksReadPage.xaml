@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.BooksReadPage"
              xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
-             Title="Livros Lidos">
+             Title="Lidos">
 
     <ext:ListView
         IsRefreshing="{Binding IsBusy}"
