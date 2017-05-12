@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LivrosQueJaLi.Views.BooksReadPage"
+             xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
+             Title="Livros Lidos">
+
+    <ext:ListView
+        IsRefreshing="{Binding IsBusy}"
+        ItemsSource="{Binding Books}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell
+                    ImageSource="{Binding VolumeInfo.ImageLinks.Thumbnail}"
+                    Text="{Binding VolumeInfo.Title}"
+                    Detail="{Binding VolumeInfo.Description}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ext:ListView>
+
+</ContentPage>

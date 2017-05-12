@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.ViewModels
 {
-    public class SearchBookViewModel : BaseViewModel
+    public class BookSearchViewModel : BaseViewModel
     {
         private GoogleBooksClient _googleBooksClient;
-                                                                        
         public ObservableRangeCollection<Book> Books { get; private set; }
 
-        public SearchBookViewModel()
+        public BookSearchViewModel()
         {
-            _googleBooksClient = new GoogleBooksClient();        
+            _googleBooksClient = new GoogleBooksClient();
             Books = new ObservableRangeCollection<Book>();
 
-            FillListView();
+            FillListView(FillListViewAction);
         }
 
-        private async void FillListView()
+        private async void FillListViewAction()
         {
             var books = await _googleBooksClient.GetBooksAsync();
             Books.ReplaceRange(books);

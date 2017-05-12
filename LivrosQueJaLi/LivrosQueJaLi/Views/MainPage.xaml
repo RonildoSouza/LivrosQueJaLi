@@ -6,7 +6,9 @@
              Title="MainPage">
 
     <TabbedPage.Children>
-        <vws:SearchBookPage/>
+        <vws:BookSearchPage/>
+        <vws:BooksReadPage/>
+        <vws:BooksWishedPage/>
     </TabbedPage.Children>
-    
+
 </TabbedPage>
