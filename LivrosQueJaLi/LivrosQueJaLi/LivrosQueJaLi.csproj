@@ -57,6 +57,7 @@
     <Compile Include="ViewModels\BooksReadViewModel.cs" />
     <Compile Include="ViewModels\BooksSearchViewModel.cs" />
     <Compile Include="ViewModels\BooksWishedViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="Views\BookCommentsPage.xaml.cs">
       <DependentUpon>BookCommentsPage.xaml</DependentUpon>
     </Compile>
@@ -74,6 +75,9 @@
     </Compile>
     <Compile Include="Views\BooksWishedPage.xaml.cs">
       <DependentUpon>BooksWishedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -165,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BookCommentsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CommentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -4,5 +4,11 @@
              x:Class="LivrosQueJaLi.Views.BookDetailTabbedPage"
              xmlns:vws="clr-namespace:LivrosQueJaLi.Views"
              Title="{Binding Book.VolumeInfo.Title}">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            Text="Comentar"
+            Command="{Binding CommentCommand}"/>
+    </TabbedPage.ToolbarItems>
     
 </TabbedPage>

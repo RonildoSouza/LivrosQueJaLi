@@ -1,9 +1,11 @@
 ﻿using LivrosQueJaLi.Models;
+using LivrosQueJaLi.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -16,9 +18,17 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _book, value); }
         }
 
+        public Command CommentCommand { get; set; }
+
         public BookDetailTabbedViewModel(Book pBook)
         {
             Book = pBook;
+            CommentCommand = new Command(ExecuteCommentCommand);
+        }
+
+        private void ExecuteCommentCommand(object obj)
+        {
+            NavigationToPush(new CommentPage(Book));
         }
     }
 }
