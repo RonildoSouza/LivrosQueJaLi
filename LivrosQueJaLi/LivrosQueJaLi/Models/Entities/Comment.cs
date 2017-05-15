@@ -14,5 +14,8 @@ namespace LivrosQueJaLi.Models.Entities
         public string CommentText { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        [JsonIgnore]
+        public string UserAndDate { get { return $"{UserComment} - {CreatedAt}"; } }
     }
 }

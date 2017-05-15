@@ -19,10 +19,10 @@ namespace LivrosQueJaLi.ViewModels
             Books = new ObservableRangeCollection<Book>();
             _userBookDAL = new UserBookDAL();
 
-            FillListView(FillListViewAction);
+            FillListView(FillBooks);
         }
 
-        private async void FillListViewAction()
+        private async void FillBooks()
         {
             var userBooks = await _userBookDAL.SelectUserBooksAsync(User.Id, true);
 
