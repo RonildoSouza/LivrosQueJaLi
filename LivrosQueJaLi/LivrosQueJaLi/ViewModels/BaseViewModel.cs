@@ -41,7 +41,6 @@ namespace LivrosQueJaLi.ViewModels
         {
             var book = obj as Book;
             NavigationToPush(new BookDetailTabbedPage(book));
-            //NavigationToPush(new BookDetailPage(book));
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
