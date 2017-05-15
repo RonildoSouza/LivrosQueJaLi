@@ -7,13 +7,14 @@
 
     <ext:ListView
         IsRefreshing="{Binding IsBusy}"
-        ItemsSource="{Binding Books}">
+        ItemsSource="{Binding Books}"
+        ItemTappedCommand="{Binding BookDetailCommand}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ImageCell
                     ImageSource="{Binding VolumeInfo.ImageLinks.Thumbnail}"
                     Text="{Binding VolumeInfo.Title}"
-                    Detail="{Binding VolumeInfo.Description}"/>
+                    Detail="{Binding VolumeInfo.Subtitle}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ext:ListView>

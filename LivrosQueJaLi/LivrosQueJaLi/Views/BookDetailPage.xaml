@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LivrosQueJaLi.Views.BookDetailPage"
+             Title="Detalhes">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="30*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label 
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="{Binding Book.VolumeInfo.Subtitle}"/>
+
+            <Image
+                Grid.Row="1"
+                Grid.Column="0"
+                Source="{Binding Book.VolumeInfo.ImageLinks.Thumbnail}"/>
+
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="1">
+                <Button
+                    Text="Lido"/>
+                <Button
+                    Text="Desejo"/>
+            </StackLayout>
+
+            <Frame
+                Grid.Row="2"
+                Grid.ColumnSpan="2">
+                <StackLayout>
+                    <Label Text="{Binding Authors, StringFormat='Autores: {0}'}"/>
+                    <Label Text="{Binding Book.VolumeInfo.Publisher, StringFormat='Editora: {0}'}"/>
+                    <Label Text="{Binding Book.VolumeInfo.PublishedDate, StringFormat='Data de Publicação: {0}'}"/>
+                    <Label Text="{Binding Book.VolumeInfo.PageCount, StringFormat='Quantidade de Páginas: {0}'}"/>
+                    <Label Text="{Binding Book.VolumeInfo.Language, StringFormat='Idioma: {0}'}"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame
+                Grid.Row="3"
+                Grid.ColumnSpan="2">
+                <Label
+                    Text="{Binding Book.VolumeInfo.Description}"/>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>

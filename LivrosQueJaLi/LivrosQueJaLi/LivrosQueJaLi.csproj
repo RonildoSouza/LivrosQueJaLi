@@ -51,11 +51,23 @@
     <Compile Include="Services\AzureClient.cs" />
     <Compile Include="Services\GoogleBooksClient.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BookCommentsViewModel.cs" />
+    <Compile Include="ViewModels\BookDetailTabbedViewModel.cs" />
+    <Compile Include="ViewModels\BookDetailViewModel.cs" />
     <Compile Include="ViewModels\BooksReadViewModel.cs" />
-    <Compile Include="ViewModels\BookSearchViewModel.cs" />
+    <Compile Include="ViewModels\BooksSearchViewModel.cs" />
     <Compile Include="ViewModels\BooksWishedViewModel.cs" />
-    <Compile Include="Views\BookSearchPage.xaml.cs">
-      <DependentUpon>BookSearchPage.xaml</DependentUpon>
+    <Compile Include="Views\BookCommentsPage.xaml.cs">
+      <DependentUpon>BookCommentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookDetailPage.xaml.cs">
+      <DependentUpon>BookDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookDetailTabbedPage.xaml.cs">
+      <DependentUpon>BookDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BooksSearchPage.xaml.cs">
+      <DependentUpon>BooksSearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BooksReadPage.xaml.cs">
       <DependentUpon>BooksReadPage.xaml</DependentUpon>
@@ -128,13 +140,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\BookSearchPage.xaml">
+    <EmbeddedResource Include="Views\BooksSearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BooksWishedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BookDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BookDetailTabbedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BookCommentsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

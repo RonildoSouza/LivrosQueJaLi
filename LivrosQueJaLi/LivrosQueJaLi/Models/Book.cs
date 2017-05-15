@@ -18,13 +18,57 @@ namespace LivrosQueJaLi.Models
         public string PublishedDate { get; set; }
         public string Description { get; set; }
         public int? PageCount { get; set; }
+
+        ReadingModes _readingModes;
+        public ReadingModes ReadingModes
+        {
+            get { return _readingModes; }
+            set
+            {
+                if (value != null && !value.Image)
+                {
+                    ImageLinks = new ImageLinks();
+                    _readingModes = value;
+                }
+            }
+        }
+
         public ImageLinks ImageLinks { get; set; }
         public string Language { get; set; }
     }
 
+    public class ReadingModes
+    {
+        public bool Text { get; set; }
+        public bool Image { get; set; }
+    }
+
     public class ImageLinks
     {
-        public string Thumbnail { get; set; }
-        public string Small { get; set; }
-    }   
+        string _thumbnail;
+        public string Thumbnail
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_thumbnail))
+                    return "http://placehold.it/128x183";
+
+                return _thumbnail;
+            }
+            set { _thumbnail = value; }
+        }
+
+        string _small;
+        public string Small
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_small))
+                    return "http://placehold.it/300x418";
+
+                return _small;
+            }
+            set { _small = value; }
+        }
+    }
 }
