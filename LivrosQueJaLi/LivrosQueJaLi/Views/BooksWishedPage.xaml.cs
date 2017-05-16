@@ -18,5 +18,11 @@ namespace LivrosQueJaLi.Views
             InitializeComponent();
             BindingContext = new BooksWishedViewModel();
         }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await (BindingContext as BooksWishedViewModel)?.FillBooksAsync();
+        }
     }
 }

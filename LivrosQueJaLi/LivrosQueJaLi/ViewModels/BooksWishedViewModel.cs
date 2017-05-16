@@ -1,10 +1,6 @@
 ﻿using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Models;
 using MvvmHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.ViewModels
@@ -18,11 +14,11 @@ namespace LivrosQueJaLi.ViewModels
         {
             Books = new ObservableRangeCollection<Book>();
             _userBookDAL = new UserBookDAL();
-
-            FillListView(FillBooks);
         }
 
-        private async void FillBooks()
+        public async Task FillBooksAsync() => await FillListView(FillAsync);
+
+        private async Task FillAsync()
         {
             var userBooks = await _userBookDAL.SelectUserBooksAsync(User.Id, true);
 

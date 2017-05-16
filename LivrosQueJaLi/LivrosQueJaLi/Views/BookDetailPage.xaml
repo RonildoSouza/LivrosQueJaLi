@@ -30,9 +30,11 @@
                 Grid.Row="1"
                 Grid.Column="1">
                 <Button
-                    Text="Lido"/>
+                    Text="Lido"
+                    Command="{Binding ReadCommand}"/>
                 <Button
-                    Text="Desejo"/>
+                    Text="Desejo"
+                    Command="{Binding WishCommand}"/>
             </StackLayout>
 
             <Frame

@@ -6,7 +6,10 @@
              Title="Pesquisa">
 
     <StackLayout>
-        <SearchBar/>
+        <SearchBar
+            Placeholder="Pesquise por: Titulo, ISBN, Autor, etc..."
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding TextSearch}"/>
 
         <ext:ListView
             IsRefreshing="{Binding IsBusy}"

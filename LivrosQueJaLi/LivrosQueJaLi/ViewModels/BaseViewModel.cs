@@ -59,18 +59,18 @@ namespace LivrosQueJaLi.ViewModels
             return true;
         }
 
-        protected void FillListView(Action action)
+        protected async Task FillListView(Func<Task> action)
         {
             if (CrossConnectivity.Current.IsConnected)
             {
                 IsBusy = true;
 
-                action();
+                await action();
 
                 IsBusy = false;
             }
             else
-                App.Current.MainPage
+                await App.Current.MainPage
                     .DisplayAlert("Sem Acesso a Internet", "Falha de conexão com a internet!", "OK");
         }
 

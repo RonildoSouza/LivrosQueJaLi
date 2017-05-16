@@ -2,10 +2,6 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
@@ -31,21 +27,23 @@ namespace LivrosQueJaLi.ViewModels
             SendCommand = new Command(ExecuteSendCommand);
         }
 
-        private void ExecuteSendCommand(object obj)
-        {
-            var comment = new Comment()
-            {
-                UserComment = User.UserName,
-                IdBook = _book.Id,
-                CommentText = EditorText
-            };
-
+        private async void ExecuteSendCommand(object obj)
+        {    
             try
             {
+                var comment = new Comment()
+                {
+                    UserComment = User.UserName,
+                    IdBook = _book.Id,
+                    CommentText = EditorText
+                };
+
                 _commentDAL.InsertOrUpdate(comment);
 
-                App.Current.MainPage.DisplayAlert(
+                await App.Current.MainPage.DisplayAlert(
                     "Sucesso", "Comentário enviado com sucesso", "OK");
+
+                await App.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception)
             {

@@ -1,12 +1,7 @@
 ﻿using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Services;
-using LivrosQueJaLi.Views;
 using MvvmHelpers;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,19 +13,37 @@ namespace LivrosQueJaLi.ViewModels
 
         public ObservableRangeCollection<Book> Books { get; private set; }
 
-        
+        public Command SearchCommand { get; set; }
+
+        private string _textSearch;
+        public string TextSearch
+        {
+            get { return _textSearch; }
+            set { SetProperty(ref _textSearch, value); }
+        }
 
         public BooksSearchViewModel()
         {
             _googleBooksClient = new GoogleBooksClient();
             Books = new ObservableRangeCollection<Book>();
+            SearchCommand = new Command(ExecuteSearchCommand);
 
-            FillListView(FillBooks);
+            FillBooks();
         }
 
-        private async void FillBooks()
+        private void ExecuteSearchCommand() => FillBooks();
+
+        private async void FillBooks() => await FillListView(FillAsync);
+
+        private async Task FillAsync()
         {
-            var books = await _googleBooksClient.GetBooksAsync();
+            IEnumerable<Book> books;
+
+            if (string.IsNullOrEmpty(TextSearch))
+                books = await _googleBooksClient.GetBooksAsync();
+            else
+                books = await _googleBooksClient.GetBooksAsync(TextSearch);
+
             Books.ReplaceRange(books);
         }
     }

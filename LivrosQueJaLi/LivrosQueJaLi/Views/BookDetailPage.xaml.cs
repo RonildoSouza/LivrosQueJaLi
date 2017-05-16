@@ -19,5 +19,5 @@ namespace LivrosQueJaLi.Views
             InitializeComponent();
             BindingContext = new BookDetailViewModel(pBook);
         }
-    }
+    }   
 }
