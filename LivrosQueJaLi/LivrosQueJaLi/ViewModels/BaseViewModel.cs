@@ -15,7 +15,7 @@ namespace LivrosQueJaLi.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public User User { get; set; }
+        public User User { get; private set; }
 
         private bool _isBusy;
         public bool IsBusy
@@ -33,7 +33,8 @@ namespace LivrosQueJaLi.ViewModels
             User = new User()
             {
                 Id = "afb376f1-3198-49d8-83a5-b8a8e86ae741",
-                IdFacebook = "abc123"
+                IdFacebook = "abc123",
+                UserName = "Usuário Teste"
             };
         }
 
@@ -70,13 +71,13 @@ namespace LivrosQueJaLi.ViewModels
                 IsBusy = false;
             }
             else
-                await App.Current.MainPage
-                    .DisplayAlert("Sem Acesso a Internet", "Falha de conexão com a internet!", "OK");
+                DisplayAlertShow("Sem Acesso a Internet", "Falha de conexão com a internet!");
         }
 
-        protected async void NavigationToPush(Page pPage)
-        {
-            await App.Current.MainPage.Navigation.PushAsync(pPage);
-        }
+        protected async void NavigationToPush(Page pPage) => await App.Current.MainPage.Navigation.PushAsync(pPage);
+
+        protected async void DisplayAlertShow(string title, string message) =>
+            await App.Current.MainPage
+                .DisplayAlert(title, message, "OK");
     }
 }

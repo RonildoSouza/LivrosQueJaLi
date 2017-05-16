@@ -28,9 +28,9 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _authors, value); }
         }
 
-        public Command ReadCommand { get; set; }
+        public Command ReadCommand { get; }
 
-        public Command WishCommand { get; set; }
+        public Command WishCommand { get; }
 
         public BookDetailViewModel(Book pBook)
         {
@@ -49,7 +49,7 @@ namespace LivrosQueJaLi.ViewModels
                 var userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
 
                 if (userBook == null)
-                    userBook = GetInstance(true, false);
+                    userBook = GetInstanceUserBook(true, false);
                 else
                 {
                     userBook.IsRead = true;
@@ -57,7 +57,7 @@ namespace LivrosQueJaLi.ViewModels
                 }
 
                 _userBookDAL.InsertOrUpdate(userBook);
-                await App.Current.MainPage.DisplayAlert("Lido", "Add aos livros lidos", "OK");
+                DisplayAlertShow("Lido", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de lidos!");
             }
             catch (Exception)
             {
@@ -72,7 +72,7 @@ namespace LivrosQueJaLi.ViewModels
                 var userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
 
                 if (userBook == null)
-                    userBook = GetInstance(false, true);
+                    userBook = GetInstanceUserBook(false, true);
                 else
                 {
                     userBook.IsRead = false;
@@ -80,7 +80,7 @@ namespace LivrosQueJaLi.ViewModels
                 }
 
                 _userBookDAL.InsertOrUpdate(userBook);
-                await App.Current.MainPage.DisplayAlert("Desejado", "Add aos livros desejados", "OK");
+                DisplayAlertShow("Desejado", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de desejados!");
             }
             catch (Exception)
             {
@@ -96,7 +96,7 @@ namespace LivrosQueJaLi.ViewModels
                     ? $"{Book.VolumeInfo.Authors[i]}, " : Book.VolumeInfo.Authors[i];
         }
 
-        private UserBook GetInstance(bool isRead, bool isWish)
+        private UserBook GetInstanceUserBook(bool isRead, bool isWish)
         {
             return new UserBook()
             {

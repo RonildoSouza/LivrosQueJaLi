@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.MainPage"
              xmlns:vws="clr-namespace:LivrosQueJaLi.Views"
-             Title="MainPage">
+             Title="{Binding UserName, StringFormat='Olá {0}!'}">
 
     <TabbedPage.Children>
         <vws:BooksSearchPage/>

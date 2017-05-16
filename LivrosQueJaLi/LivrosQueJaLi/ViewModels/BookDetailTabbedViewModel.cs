@@ -26,9 +26,6 @@ namespace LivrosQueJaLi.ViewModels
             CommentCommand = new Command(ExecuteCommentCommand);
         }
 
-        private void ExecuteCommentCommand(object obj)
-        {
-            NavigationToPush(new CommentPage(Book));
-        }
+        private void ExecuteCommentCommand(object obj) => NavigationToPush(new CommentPage(Book));
     }
 }

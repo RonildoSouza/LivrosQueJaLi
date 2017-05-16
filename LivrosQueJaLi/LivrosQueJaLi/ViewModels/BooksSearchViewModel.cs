@@ -13,7 +13,7 @@ namespace LivrosQueJaLi.ViewModels
 
         public ObservableRangeCollection<Book> Books { get; private set; }
 
-        public Command SearchCommand { get; set; }
+        public Command SearchCommand { get; }
 
         private string _textSearch;
         public string TextSearch

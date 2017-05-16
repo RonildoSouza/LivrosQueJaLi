@@ -3,6 +3,7 @@ using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using MvvmHelpers;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -13,12 +14,17 @@ namespace LivrosQueJaLi.ViewModels
 
         public ObservableRangeCollection<Comment> Comments { get; set; }
 
+        public Command RefreshCommand { get; }
+
         public BookCommentsViewModel(Book pBook)
         {
             _book = pBook;
             _commentDAL = new CommentDAL();
             Comments = new ObservableRangeCollection<Comment>();
+            RefreshCommand = new Command(ExecuteRefreshCommand);
         }
+
+        private async void ExecuteRefreshCommand() => await FillCommentsAsync();
 
         public async Task FillCommentsAsync() => await FillListView(FillAsync);
 

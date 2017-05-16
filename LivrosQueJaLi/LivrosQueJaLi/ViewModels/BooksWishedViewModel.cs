@@ -2,19 +2,26 @@
 using LivrosQueJaLi.Models;
 using MvvmHelpers;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
 {
     public class BooksWishedViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<Book> Books { get; private set; }
         private UserBookDAL _userBookDAL;
+
+        public ObservableRangeCollection<Book> Books { get; private set; }
+
+        public Command RefreshCommand { get; }
 
         public BooksWishedViewModel()
         {
-            Books = new ObservableRangeCollection<Book>();
             _userBookDAL = new UserBookDAL();
+            Books = new ObservableRangeCollection<Book>();
+            RefreshCommand = new Command(ExecuteRefreshCommand);
         }
+
+        private async void ExecuteRefreshCommand() => await FillBooksAsync();
 
         public async Task FillBooksAsync() => await FillListView(FillAsync);
 

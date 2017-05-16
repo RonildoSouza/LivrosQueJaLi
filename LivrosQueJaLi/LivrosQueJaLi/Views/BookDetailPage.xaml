@@ -4,7 +4,7 @@
              x:Class="LivrosQueJaLi.Views.BookDetailPage"
              Title="Detalhes">
     <ScrollView>
-        <Grid>
+        <Grid Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -12,29 +12,38 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70*"/>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
             <Label 
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                Text="{Binding Book.VolumeInfo.Subtitle}"/>
+                Text="{Binding Book.VolumeInfo.Subtitle}"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="Center"/>
 
             <Image
                 Grid.Row="1"
                 Grid.Column="0"
-                Source="{Binding Book.VolumeInfo.ImageLinks.Thumbnail}"/>
+                Source="{Binding Book.VolumeInfo.ImageLinks.Thumbnail}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
 
             <StackLayout
                 Grid.Row="1"
                 Grid.Column="1">
                 <Button
                     Text="Lido"
-                    Command="{Binding ReadCommand}"/>
+                    Command="{Binding ReadCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"/>
                 <Button
                     Text="Desejo"
-                    Command="{Binding WishCommand}"/>
+                    Command="{Binding WishCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"/>
             </StackLayout>
 
             <Frame

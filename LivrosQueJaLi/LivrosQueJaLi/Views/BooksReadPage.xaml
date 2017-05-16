@@ -8,7 +8,8 @@
     <ext:ListView
         IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Books}"
-        ItemTappedCommand="{Binding BookDetailCommand}">
+        ItemTappedCommand="{Binding BookDetailCommand}"
+        RefreshCommand="{Binding RefreshCommand}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ImageCell

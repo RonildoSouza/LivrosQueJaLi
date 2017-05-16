@@ -28,7 +28,7 @@ namespace LivrosQueJaLi.ViewModels
         }
 
         private async void ExecuteSendCommand(object obj)
-        {    
+        {
             try
             {
                 var comment = new Comment()
@@ -40,8 +40,7 @@ namespace LivrosQueJaLi.ViewModels
 
                 _commentDAL.InsertOrUpdate(comment);
 
-                await App.Current.MainPage.DisplayAlert(
-                    "Sucesso", "Comentário enviado com sucesso", "OK");
+                DisplayAlertShow("Sucesso", "Comentário enviado com sucesso!");
 
                 await App.Current.MainPage.Navigation.PopAsync();
             }
