@@ -29,6 +29,7 @@ namespace LivrosQueJaLi.ViewModels
             SearchCommand = new Command(ExecuteSearchCommand);
 
             FillBooks();
+            IsBusy = false;
         }
 
         private void ExecuteSearchCommand() => FillBooks();
@@ -36,7 +37,7 @@ namespace LivrosQueJaLi.ViewModels
         private async void FillBooks() => await FillListView(FillAsync);
 
         private async Task FillAsync()
-        {
+        {                
             IEnumerable<Book> books;
 
             if (string.IsNullOrEmpty(TextSearch))

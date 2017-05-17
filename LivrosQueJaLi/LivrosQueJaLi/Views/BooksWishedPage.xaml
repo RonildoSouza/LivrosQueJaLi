@@ -9,7 +9,8 @@
         IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Books}"
         ItemTappedCommand="{Binding BookDetailCommand}"
-        RefreshCommand="{Binding RefreshCommand}">
+        RefreshCommand="{Binding RefreshCommand}"
+        IsPullToRefreshEnabled="True">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ImageCell

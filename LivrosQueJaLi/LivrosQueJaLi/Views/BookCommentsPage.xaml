@@ -5,10 +5,12 @@
              xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
              Title="Comentários">
 
-    <ext:ListView
+    <ext:ListView        
         IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Comments}"
-        RefreshCommand="{Binding RefreshCommand}">
+        RefreshCommand="{Binding RefreshCommand}"
+        IsPullToRefreshEnabled="True"
+        IsEnabled="False">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell
