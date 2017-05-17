@@ -66,7 +66,7 @@ namespace LivrosQueJaLi.ViewModels
             {
                 IsBusy = true;
 
-                await action();
+                await action().ConfigureAwait(false);
 
                 IsBusy = false;
             }
