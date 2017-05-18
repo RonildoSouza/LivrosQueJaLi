@@ -4,13 +4,20 @@
              x:Class="LivrosQueJaLi.Views.BookCommentsPage"
              xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
              Title="Comentários">
-
     <ext:ListView        
         IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Comments}"
         RefreshCommand="{Binding RefreshCommand}"
         IsPullToRefreshEnabled="True"
-        IsEnabled="False">
+        IsEnabled="False"
+        ItemTappedCommand="{Binding CommentCommand}">
+
+        <ListView.IsEnabled>
+            <OnPlatform x:TypeArguments="x:Boolean">
+                <OnPlatform.Android>True</OnPlatform.Android>
+            </OnPlatform>
+        </ListView.IsEnabled>
+
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell

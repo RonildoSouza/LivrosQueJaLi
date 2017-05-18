@@ -21,9 +21,7 @@ namespace LivrosQueJaLi.ViewModels
             RefreshCommand = new Command(ExecuteRefreshCommand);
         }
 
-        private async void ExecuteRefreshCommand() => await FillBooksAsync();
-
-        public async Task FillBooksAsync() => await FillListView(FillAsync);
+        private void ExecuteRefreshCommand() => FillListView(FillAsync);
 
         private async Task FillAsync()
         {

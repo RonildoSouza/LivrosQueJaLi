@@ -2,8 +2,10 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using MvvmHelpers;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -16,22 +18,30 @@ namespace LivrosQueJaLi.ViewModels
 
         public Command RefreshCommand { get; }
 
+        public Command CommentCommand { get; set; }
+
         public BookCommentsViewModel(Book pBook)
         {
             _book = pBook;
             _commentDAL = new CommentDAL();
             Comments = new ObservableRangeCollection<Comment>();
+
             RefreshCommand = new Command(ExecuteRefreshCommand);
+            CommentCommand = new Command(ExecuteCommentCommand);
         }
 
-        private async void ExecuteRefreshCommand() => await FillCommentsAsync();
+        private void ExecuteCommentCommand(object obj)
+        {
+            var comment = obj as Comment;
+            DisplayAlertShow(comment?.UserAndDate, comment?.CommentText);
+        }
 
-        public async Task FillCommentsAsync() => await FillListView(FillAsync);
+        private void ExecuteRefreshCommand() => FillListView(FillAsync);
 
         private async Task FillAsync()
         {
             var comments = await _commentDAL.SelectBookCommentsAsync(_book.Id);
-            Comments.ReplaceRange(comments);
+            Comments.ReplaceRange(comments.OrderByDescending(c => c.CreatedAt));
         }
     }
 }

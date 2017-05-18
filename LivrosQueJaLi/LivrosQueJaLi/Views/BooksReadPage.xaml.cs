@@ -14,10 +14,10 @@ namespace LivrosQueJaLi.Views
             BindingContext = new BooksReadViewModel();
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await (BindingContext as BooksReadViewModel)?.FillBooksAsync();
+            (BindingContext as BooksReadViewModel)?.RefreshCommand.Execute(null);
         }
     }
 }

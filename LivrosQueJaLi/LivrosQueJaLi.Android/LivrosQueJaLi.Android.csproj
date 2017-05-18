@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\Authentication_Android.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LivrosQueJaLi\LivrosQueJaLi.csproj">
-      <Project>{73c937c4-8aff-45c6-b0f7-43e3c632bff5}</Project>
+      <Project>{e7170a2e-b754-4b1d-b5b3-6ddfd2e2feb8}</Project>
       <Name>LivrosQueJaLi</Name>
     </ProjectReference>
   </ItemGroup>

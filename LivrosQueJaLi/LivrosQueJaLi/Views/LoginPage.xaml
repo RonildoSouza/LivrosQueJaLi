@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.LoginPage"
-             Title="Login">
+             Padding="10">
 
     <Button
         Text="Login com Facebook"
-        Command=""
+        Command="{Binding LoginFBCommand}"
         BackgroundColor="Blue"
         TextColor="White"
         VerticalOptions="Center"
-        HorizontalOptions="CenterAndExpand"/>
+        HorizontalOptions="FillAndExpand"/>
 
 </ContentPage>

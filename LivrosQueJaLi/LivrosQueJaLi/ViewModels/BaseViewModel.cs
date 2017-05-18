@@ -17,6 +17,13 @@ namespace LivrosQueJaLi.ViewModels
 
         public User User { get; private set; }
 
+        //private User _user;   
+        //public User User
+        //{
+        //    get { return _user; }
+        //    set { if (_user == null) _user = value; }
+        //} 
+
         private bool _isBusy;
         public bool IsBusy
         {
@@ -29,13 +36,11 @@ namespace LivrosQueJaLi.ViewModels
         public BaseViewModel()
         {
             BookDetailCommand = new Command(ExecuteBookDetailCommand);
+        }
 
-            User = new User()
-            {
-                Id = "afb376f1-3198-49d8-83a5-b8a8e86ae741",
-                IdFacebook = "abc123",
-                UserName = "Usuário Teste"
-            };
+        public BaseViewModel(User pUser) : this()
+        {
+            User = pUser;
         }
 
         protected virtual void ExecuteBookDetailCommand(object obj)
@@ -60,18 +65,22 @@ namespace LivrosQueJaLi.ViewModels
             return true;
         }
 
-        protected async Task FillListView(Func<Task> action)
+        protected async void FillListView(Func<Task> action)
         {
-            if (CrossConnectivity.Current.IsConnected)
+            try
             {
-                IsBusy = true;
-
-                await action().ConfigureAwait(false);
-
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    IsBusy = true;
+                    await action();
+                }
+                else
+                    DisplayAlertShow("Sem Acesso a Internet", "Falha de conexão com a internet!");
+            }
+            finally
+            {
                 IsBusy = false;
             }
-            else
-                DisplayAlertShow("Sem Acesso a Internet", "Falha de conexão com a internet!");
         }
 
         protected async void NavigationToPush(Page pPage) => await App.Current.MainPage.Navigation.PushAsync(pPage);

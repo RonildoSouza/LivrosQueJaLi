@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using LivrosQueJaLi.Droid.Authentication;
+using Xamarin.Forms;
+using LivrosQueJaLi.Authentication;
 
 namespace LivrosQueJaLi.Droid
 {
@@ -21,6 +24,9 @@ namespace LivrosQueJaLi.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+            //Obtem o contexto para efetuar o login
+            ((Authentication_Android)DependencyService.Get<IAuthentication>()).Init(this);
         }
     }
 }

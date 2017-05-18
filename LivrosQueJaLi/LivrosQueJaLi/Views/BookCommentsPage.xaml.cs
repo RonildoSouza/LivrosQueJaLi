@@ -15,10 +15,10 @@ namespace LivrosQueJaLi.Views
             BindingContext = new BookCommentsViewModel(pBook);
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await (BindingContext as BookCommentsViewModel)?.FillCommentsAsync();
+            (BindingContext as BookCommentsViewModel)?.RefreshCommand.Execute(null);
         }
     }
 }

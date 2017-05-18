@@ -38,10 +38,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="DAL\CommentDAL.cs" />
     <Compile Include="DAL\IBaseDAL.cs" />
     <Compile Include="DAL\UserBookDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="ViewModels\BooksSearchViewModel.cs" />
     <Compile Include="ViewModels\BooksWishedViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\BookCommentsPage.xaml.cs">
       <DependentUpon>BookCommentsPage.xaml</DependentUpon>
     </Compile>

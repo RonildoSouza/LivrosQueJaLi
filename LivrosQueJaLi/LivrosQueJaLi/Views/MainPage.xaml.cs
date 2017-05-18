@@ -1,4 +1,5 @@
-﻿using LivrosQueJaLi.ViewModels;
+﻿using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,10 @@ namespace LivrosQueJaLi.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : TabbedPage
     {
-        public MainPage()
+        public MainPage(User pUser)
         {
             InitializeComponent();
-            BindingContext = new BaseViewModel().User;
+            BindingContext = new BaseViewModel(pUser).User;
         }
     }
 }

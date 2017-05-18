@@ -26,12 +26,12 @@ namespace LivrosQueJaLi.Services
 
             try
             {
-                using (HttpResponseMessage response = await _client.GetAsync(url))
+                using (HttpResponseMessage response = await _client.GetAsync(url).ConfigureAwait(false))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         book = new Book();
-                        var responseString = await response.Content.ReadAsStringAsync();
+                        var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                         book = JsonConvert.DeserializeObject<Book>(responseString);
                     }
                 }
@@ -54,12 +54,12 @@ namespace LivrosQueJaLi.Services
 
             try
             {
-                using (HttpResponseMessage response = await _client.GetAsync(url))
+                using (HttpResponseMessage response = await _client.GetAsync(url).ConfigureAwait(false))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         books = new List<Book>();
-                        var responseString = await response.Content.ReadAsStringAsync();
+                        var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                         var array = JObject.Parse(responseString).SelectToken("items").ToArray();
 
                         for (int i = 0; i < array.Length; i++)

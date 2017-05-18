@@ -28,16 +28,14 @@ namespace LivrosQueJaLi.ViewModels
             Books = new ObservableRangeCollection<Book>();
             SearchCommand = new Command(ExecuteSearchCommand);
 
-            FillBooks();
+            FillListView(FillAsync);
             IsBusy = false;
         }
 
-        private void ExecuteSearchCommand() => FillBooks();
-
-        private async void FillBooks() => await FillListView(FillAsync);
+        private void ExecuteSearchCommand() => FillListView(FillAsync);
 
         private async Task FillAsync()
-        {                
+        {
             IEnumerable<Book> books;
 
             if (string.IsNullOrEmpty(TextSearch))
