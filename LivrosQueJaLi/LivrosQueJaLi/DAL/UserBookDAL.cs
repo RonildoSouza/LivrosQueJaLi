@@ -57,5 +57,8 @@ namespace LivrosQueJaLi.DAL
 
             return books;
         }
+
+        public async void DeleteUserBook(UserBook pUserBook) =>
+            await _azureClient.Table.DeleteAsync(pUserBook);
     }
 }

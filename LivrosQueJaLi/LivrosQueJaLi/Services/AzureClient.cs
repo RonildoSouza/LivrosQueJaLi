@@ -37,23 +37,24 @@ namespace LivrosQueJaLi.Services
                 if (msUser != null)
                 {
                     var profile = await _client
-                        .InvokeApiAsync("/.auth/me", System.Net.Http.HttpMethod.Get, null);
+                        .InvokeApiAsync("/.auth/me", System.Net.Http.HttpMethod.Get, null)
+                        .ConfigureAwait(false);
 
-                    // Monta o array e busca o UserName da estrutura JSON recebida pelo FB
+                    // Monta o array e busca o UserId e UserName do FB da estrutura JSON recebida.
                     var a = JArray.Parse(profile[0]["user_claims"].ToString());
+                    string userId = "";
                     string userName = "";
                     for (int i = 0; i < a.Count; i++)
                     {
-                        if (a[i].Value<string>("typ").Contains("claims/name"))
-                        {
+                        if (a[i].Value<string>("typ").Contains("claims/nameidentifier"))
+                            userId = a[i].Value<string>("val");
+                        else if (a[i].Value<string>("typ").Contains("claims/name"))
                             userName = a[i].Value<string>("val");
-                            //break;
-                        }
                     }
 
                     user = new User()
                     {
-                        IdFacebook = profile[0]["user_id"].ToString(),
+                        IdFacebook = userId,
                         UserName = userName
                     };
                 }

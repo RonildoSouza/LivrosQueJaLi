@@ -5,7 +5,6 @@ using MvvmHelpers;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System;
 
 namespace LivrosQueJaLi.ViewModels
 {

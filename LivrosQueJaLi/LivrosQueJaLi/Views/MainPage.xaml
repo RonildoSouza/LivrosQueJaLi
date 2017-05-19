@@ -5,6 +5,13 @@
              xmlns:vws="clr-namespace:LivrosQueJaLi.Views"
              Title="{Binding UserName, StringFormat='Olá {0}!'}">
 
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            Text="Logout"
+            IsDestructive="True"
+            Order="Secondary"/>
+    </TabbedPage.ToolbarItems>
+
     <TabbedPage.Children>
         <vws:BooksSearchPage/>
         <vws:BooksReadPage/>

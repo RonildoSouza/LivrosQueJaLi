@@ -1,4 +1,5 @@
-﻿using LivrosQueJaLi.Models;
+﻿using LivrosQueJaLi.Helpers;
+using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Views;
 using Plugin.Connectivity;
@@ -15,15 +16,6 @@ namespace LivrosQueJaLi.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public User User { get; private set; }
-
-        //private User _user;   
-        //public User User
-        //{
-        //    get { return _user; }
-        //    set { if (_user == null) _user = value; }
-        //} 
-
         private bool _isBusy;
         public bool IsBusy
         {
@@ -31,16 +23,13 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
-        public Command BookDetailCommand { get; set; }
+        public User User { get { return Constants.User; } }
+
+        public Command BookDetailCommand { get; private set; }
 
         public BaseViewModel()
         {
             BookDetailCommand = new Command(ExecuteBookDetailCommand);
-        }
-
-        public BaseViewModel(User pUser) : this()
-        {
-            User = pUser;
         }
 
         protected virtual void ExecuteBookDetailCommand(object obj)

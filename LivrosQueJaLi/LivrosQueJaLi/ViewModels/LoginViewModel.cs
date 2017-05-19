@@ -1,12 +1,8 @@
 ﻿using LivrosQueJaLi.DAL;
+using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using LivrosQueJaLi.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
@@ -41,8 +37,10 @@ namespace LivrosQueJaLi.ViewModels
                 }
 
                 user = userDB;
+                Constants.User = user;
 
-                NavigationToPush(new NavigationPage(new MainPage(user)));
+                Application.Current.MainPage = new NavigationPage(new MainPage(user));
+                //NavigationToPush(new NavigationPage(new MainPage(user)));
             }
         }
     }
