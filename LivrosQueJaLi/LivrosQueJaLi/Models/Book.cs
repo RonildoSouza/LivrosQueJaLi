@@ -51,7 +51,7 @@ namespace LivrosQueJaLi.Models
             get
             {
                 if (string.IsNullOrEmpty(_thumbnail))
-                    return "http://placehold.it/128x183";
+                    return "noimage_128_183.png";
 
                 return _thumbnail;
             }
@@ -64,7 +64,7 @@ namespace LivrosQueJaLi.Models
             get
             {
                 if (string.IsNullOrEmpty(_small))
-                    return "http://placehold.it/300x418";
+                    return "noimage_300_418.png";
 
                 return _small;
             }

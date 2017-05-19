@@ -10,7 +10,7 @@ namespace LivrosQueJaLi.Views
         public MainPage(User pUser)
         {
             InitializeComponent();
-            BindingContext = pUser;
+            BindingContext = pUser; 
         }
     }
 }

@@ -2,11 +2,8 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -21,7 +18,7 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _book, value); }
         }
 
-        private string _authors;
+        private string _authors = string.Empty;
         public string Authors
         {
             get { return _authors; }
@@ -34,8 +31,8 @@ namespace LivrosQueJaLi.ViewModels
 
         public BookDetailViewModel(Book pBook)
         {
-            _userBookDAL = new UserBookDAL();
             Book = pBook;
+            _userBookDAL = new UserBookDAL();
             ReadCommand = new Command(ExecuteReadCommand);
             WishCommand = new Command(ExecuteWishCommand);
 
@@ -90,10 +87,13 @@ namespace LivrosQueJaLi.ViewModels
 
         private void FillAuthors()
         {
-            for (int i = 0; i < Book.VolumeInfo.Authors.Length; i++)
-                Authors +=
-                    (Book.VolumeInfo.Authors.Length - i > 1)
-                    ? $"{Book.VolumeInfo.Authors[i]}, " : Book.VolumeInfo.Authors[i];
+            if (Book.VolumeInfo.Authors != null)
+            {
+                for (int i = 0; i < Book.VolumeInfo.Authors.Length; i++)
+                    Authors +=
+                        (Book.VolumeInfo.Authors.Length - i > 1)
+                        ? $"{Book.VolumeInfo.Authors[i]}, " : Book.VolumeInfo.Authors[i];
+            }
         }
 
         private UserBook GetInstanceUserBook(bool isRead, bool isWish)
@@ -105,6 +105,11 @@ namespace LivrosQueJaLi.ViewModels
                 IsRead = isRead,
                 IsWish = isWish
             };
+        }
+
+        protected override Task FillObservableCollectionAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

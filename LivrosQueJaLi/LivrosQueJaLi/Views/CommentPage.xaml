@@ -13,7 +13,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Editor
                 Grid.Row="0"
                 Grid.Column="0"
@@ -22,9 +22,10 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Text="Enviar"
-                FontSize="Large"
-                Command="{Binding SendCommand}"/>
-        </Grid>        
+                Command="{Binding SendCommand}"
+                Image="ic_send_white_48dp.png"
+                Style="{StaticResource ButtonsSetting}"/>
+        </Grid>
     </ScrollView>
-    
+
 </ContentPage>

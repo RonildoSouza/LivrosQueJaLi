@@ -8,6 +8,7 @@
     <TabbedPage.ToolbarItems>
         <ToolbarItem
             Text="Comentar"
+            Icon="ic_comment_white_48dp.png"
             Command="{Binding CommentCommand}"/>
     </TabbedPage.ToolbarItems>
     

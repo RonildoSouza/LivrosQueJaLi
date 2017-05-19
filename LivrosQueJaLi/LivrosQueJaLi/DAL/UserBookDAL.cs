@@ -39,23 +39,25 @@ namespace LivrosQueJaLi.DAL
 
         public async Task<List<UserBook>> SelectUserBooksAsync(string pIdUser, bool pWish = false)
         {
-            List<UserBook> books = null;
-            var bks = await _azureClient.Table
+            List<UserBook> newListUserBooks = null;
+            var userBooks = await _azureClient.Table
                 .Where(b => b.IdUser == pIdUser
                 && b.IsWish == pWish && b.IsRead != pWish)
                 .ToListAsync();
 
-            if (bks != null || bks.Count > 0)
+            if (userBooks != null || userBooks.Count > 0)
             {
-                books = new List<UserBook>();
-                foreach (var book in bks)
+                newListUserBooks = new List<UserBook>();
+                foreach (var userBook in userBooks)
                 {
-                    book.Book = await new GoogleBooksClient().GetBookByIdAsync(book.IdBook);
-                    books.Add(book);
+                    userBook.Book = await new GoogleBooksClient().GetBookByIdAsync(userBook.IdBook);
+                    newListUserBooks.Add(userBook);
                 }
             }
 
-            return books;
+            return newListUserBooks
+                .OrderBy(ub => ub.Book.VolumeInfo.Title)
+                .ToList();
         }
 
         public async void DeleteUserBook(UserBook pUserBook) =>

@@ -27,5 +27,10 @@ namespace LivrosQueJaLi.ViewModels
         }
 
         private void ExecuteCommentCommand(object obj) => NavigationToPush(new CommentPage(Book));
+
+        protected override Task FillObservableCollectionAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

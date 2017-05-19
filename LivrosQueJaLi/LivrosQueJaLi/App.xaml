@@ -2,9 +2,30 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.App">
-	<Application.Resources>
+    <Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Style x:Key="ButtonsSetting" TargetType="Button">
+                <Setter Property="BackgroundColor">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.Android>#00bfa5</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
 
-	</Application.Resources>
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.Android>White</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+        </ResourceDictionary>
+
+    </Application.Resources>
 </Application>

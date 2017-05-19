@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrosQueJaLi.Android", "LivrosQueJaLi\LivrosQueJaLi.Android\LivrosQueJaLi.Android.csproj", "{DBE42534-16A3-46B7-9180-57FB7136194C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrosQueJaLi", "LivrosQueJaLi\LivrosQueJaLi\LivrosQueJaLi.csproj", "{E7170A2E-B754-4B1D-B5B3-6DDFD2E2FEB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrosQueJaLi.UWP", "LivrosQueJaLi\LivrosQueJaLi.UWP\LivrosQueJaLi.UWP.csproj", "{3746BF75-813E-4609-B19B-4FBC9A766554}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrosQueJaLi.iOS", "LivrosQueJaLi\LivrosQueJaLi.iOS\LivrosQueJaLi.iOS.csproj", "{07790921-B86A-42E0-8059-36FF12D3225B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteLivrosQueJaLi", "TesteLivrosQueJaLi\TesteLivrosQueJaLi.csproj", "{F02BD6FD-643F-419F-8F26-7AB0C9E8508D}"
 EndProject
@@ -221,38 +219,6 @@ Global
 		{3746BF75-813E-4609-B19B-4FBC9A766554}.Release|x86.ActiveCfg = Release|x86
 		{3746BF75-813E-4609-B19B-4FBC9A766554}.Release|x86.Build.0 = Release|x86
 		{3746BF75-813E-4609-B19B-4FBC9A766554}.Release|x86.Deploy.0 = Release|x86
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|ARM.ActiveCfg = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|x64.ActiveCfg = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Ad-Hoc|x86.ActiveCfg = Ad-Hoc|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|Any CPU.ActiveCfg = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|ARM.ActiveCfg = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|x64.ActiveCfg = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.AppStore|x86.ActiveCfg = AppStore|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|ARM.ActiveCfg = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|iPhone.Build.0 = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|x64.ActiveCfg = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Debug|x86.ActiveCfg = Debug|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|ARM.ActiveCfg = Release|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|iPhone.ActiveCfg = Release|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|iPhone.Build.0 = Release|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|x64.ActiveCfg = Release|iPhone
-		{07790921-B86A-42E0-8059-36FF12D3225B}.Release|x86.ActiveCfg = Release|iPhone
 		{F02BD6FD-643F-419F-8F26-7AB0C9E8508D}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{F02BD6FD-643F-419F-8F26-7AB0C9E8508D}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{F02BD6FD-643F-419F-8F26-7AB0C9E8508D}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU

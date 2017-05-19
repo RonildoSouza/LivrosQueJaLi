@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureClient.cs" />
     <Compile Include="Services\GoogleBooksClient.cs" />
+    <Compile Include="ViewModels\BaseUserBookViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BookCommentsViewModel.cs" />
     <Compile Include="ViewModels\BookDetailTabbedViewModel.cs" />

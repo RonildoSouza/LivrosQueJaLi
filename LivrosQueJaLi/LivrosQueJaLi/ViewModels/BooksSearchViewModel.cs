@@ -1,6 +1,5 @@
 ﻿using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Services;
-using MvvmHelpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,8 +9,6 @@ namespace LivrosQueJaLi.ViewModels
     public class BooksSearchViewModel : BaseViewModel
     {
         private GoogleBooksClient _googleBooksClient;
-
-        public ObservableRangeCollection<Book> Books { get; private set; }
 
         public Command SearchCommand { get; }
 
@@ -25,16 +22,15 @@ namespace LivrosQueJaLi.ViewModels
         public BooksSearchViewModel()
         {
             _googleBooksClient = new GoogleBooksClient();
-            Books = new ObservableRangeCollection<Book>();
             SearchCommand = new Command(ExecuteSearchCommand);
 
-            FillListView(FillAsync);
+            ExecuteSearchCommand();
             IsBusy = false;
         }
 
-        private void ExecuteSearchCommand() => FillListView(FillAsync);
+        private void ExecuteSearchCommand() => FillListView(FillObservableCollectionAsync);
 
-        private async Task FillAsync()
+        protected override async Task FillObservableCollectionAsync()
         {
             IEnumerable<Book> books;
 

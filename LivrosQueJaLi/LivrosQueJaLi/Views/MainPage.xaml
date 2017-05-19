@@ -9,7 +9,8 @@
         <ToolbarItem
             Text="Logout"
             IsDestructive="True"
-            Order="Secondary"/>
+            Order="Secondary"
+            Icon="ic_exit_to_app_white_48dp.png"/>
     </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>

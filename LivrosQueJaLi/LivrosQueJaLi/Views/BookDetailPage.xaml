@@ -28,24 +28,26 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Source="{Binding Book.VolumeInfo.ImageLinks.Thumbnail}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
 
             <StackLayout
                 Grid.Row="1"
                 Grid.Column="1">
                 <Button
                     Text="Lido"
-                    FontSize="Medium"
                     Command="{Binding ReadCommand}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center"/>
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    Image="ic_check_white_48dp.png"
+                    Style="{StaticResource ButtonsSetting}"/>
                 <Button
                     Text="Desejo"
-                    FontSize="Medium"
                     Command="{Binding WishCommand}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center"/>
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    Image="ic_star_white_48dp.png"
+                    Style="{StaticResource ButtonsSetting}"/>
             </StackLayout>
 
             <Frame

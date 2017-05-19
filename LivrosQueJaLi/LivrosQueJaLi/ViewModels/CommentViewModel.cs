@@ -3,6 +3,7 @@ using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using System;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -48,6 +49,11 @@ namespace LivrosQueJaLi.ViewModels
             {
                 throw;
             }
+        }
+
+        protected override Task FillObservableCollectionAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,6 +2,7 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Views;
+using MvvmHelpers;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableRangeCollection<Book> Books { get; private set; }
 
         private bool _isBusy;
         public bool IsBusy
@@ -29,6 +32,7 @@ namespace LivrosQueJaLi.ViewModels
 
         public BaseViewModel()
         {
+            Books = new ObservableRangeCollection<Book>();
             BookDetailCommand = new Command(ExecuteBookDetailCommand);
         }
 
@@ -71,6 +75,8 @@ namespace LivrosQueJaLi.ViewModels
                 IsBusy = false;
             }
         }
+
+        protected abstract Task FillObservableCollectionAsync();
 
         protected async void NavigationToPush(Page pPage) => await App.Current.MainPage.Navigation.PushAsync(pPage);
 

@@ -1,4 +1,6 @@
-﻿using LivrosQueJaLi.DAL;
+﻿using System;
+using System.Threading.Tasks;
+using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
@@ -39,9 +41,13 @@ namespace LivrosQueJaLi.ViewModels
                 user = userDB;
                 Constants.User = user;
 
-                Application.Current.MainPage = new NavigationPage(new MainPage(user));
-                //NavigationToPush(new NavigationPage(new MainPage(user)));
+                await Application.Current.MainPage.Navigation.PushAsync(new MainPage(user));
             }
+        }
+
+        protected override Task FillObservableCollectionAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
