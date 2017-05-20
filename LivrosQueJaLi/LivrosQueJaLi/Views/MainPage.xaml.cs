@@ -1,4 +1,5 @@
 ﻿using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace LivrosQueJaLi.Views
         public MainPage(User pUser)
         {
             InitializeComponent();
-            BindingContext = pUser; 
+            BindingContext = new MainViewModel(pUser);
         }
     }
 }

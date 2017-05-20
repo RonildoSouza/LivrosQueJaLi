@@ -5,6 +5,7 @@ namespace LivrosQueJaLi.Authentication
 {
     public interface IAuthentication
     {
-        Task<MobileServiceUser> LoginAsync(IMobileServiceClient pClient, MobileServiceAuthenticationProvider pProvider);
+        Task<MobileServiceUser> LoginAsync(
+            IMobileServiceClient pClient, MobileServiceAuthenticationProvider pProvider);
     }
 }

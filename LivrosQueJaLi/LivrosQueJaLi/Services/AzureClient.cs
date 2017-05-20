@@ -3,6 +3,8 @@ using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -36,9 +38,14 @@ namespace LivrosQueJaLi.Services
 
                 if (msUser != null)
                 {
+                    Settings.UserId = msUser.UserId;
+                    Settings.AuthToken = msUser.MobileServiceAuthenticationToken;
+
                     var profile = await _client
-                        .InvokeApiAsync("/.auth/me", System.Net.Http.HttpMethod.Get, null)
-                        .ConfigureAwait(false);
+                        .InvokeApiAsync("/.auth/me", System.Net.Http.HttpMethod.Get, null);
+
+                    // access_token 
+                    Settings.AccessToken = profile[0].Value<string>("access_token");
 
                     // Monta o array e busca o UserId e UserName do FB da estrutura JSON recebida.
                     var a = JArray.Parse(profile[0]["user_claims"].ToString());
@@ -73,6 +80,23 @@ namespace LivrosQueJaLi.Services
             }
 
             return user;
+        }
+
+        public async Task LogoutAsync()
+        {
+            if (!string.IsNullOrEmpty(Settings.UserId) && !string.IsNullOrEmpty(Settings.AuthToken))
+                _client.CurrentUser = new MobileServiceUser(Settings.UserId);
+
+            // Invalidate the token on the mobile backend
+            var authUri = new Uri($"{MobileAppUri}/.auth/logout");
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", _client.CurrentUser.MobileServiceAuthenticationToken);
+                await httpClient.GetAsync(authUri);
+            }
+
+            // Remove the token from the MobileServiceClient
+            await _client.LogoutAsync();
         }
     }
 }

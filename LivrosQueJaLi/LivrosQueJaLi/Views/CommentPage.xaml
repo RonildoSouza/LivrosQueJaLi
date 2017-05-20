@@ -23,7 +23,7 @@
                 Grid.Column="0"
                 Text="Enviar"
                 Command="{Binding SendCommand}"
-                Image="ic_send_white_48dp.png"
+                Image="ic_send_black_36dp.png"
                 Style="{StaticResource ButtonsSetting}"/>
         </Grid>
     </ScrollView>

@@ -9,7 +9,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "Newtonsoft.Json": "10.0.2",
     "Xam.Plugin.Connectivity": "2.3.0",
-    "Xamarin.Forms": "2.3.4.231"
+    "Xam.Plugins.Settings": "2.5.8",
+    "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
     "uap10.0": {}

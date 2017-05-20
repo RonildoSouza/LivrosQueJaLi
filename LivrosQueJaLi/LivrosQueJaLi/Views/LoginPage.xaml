@@ -1,18 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LivrosQueJaLi.Views.LoginPage"
-             Padding="10"
-             Title="Livros Que Já Li - Login">
+             x:Class="LivrosQueJaLi.Views.LoginPage"             
+             Title="Livros Que Já Li">
 
-    <Button
-        Text="Login com Facebook"
-        Command="{Binding LoginFBCommand}"
-        BackgroundColor="#3B5998"
-        TextColor="White"
-        FontSize="Large"
-        Image="ic_facebook.png"
-        VerticalOptions="Center"
-        HorizontalOptions="FillAndExpand"/>
+    <StackLayout
+        Padding="10"
+        VerticalOptions="CenterAndExpand"
+        HorizontalOptions="CenterAndExpand">
+        <ActivityIndicator 
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"/>
+
+        <Button
+            Text="Login com Facebook"
+            Command="{Binding LoginFBCommand}"
+            BackgroundColor="#3B5998"
+            TextColor="White"
+            FontSize="Large"
+            Image="ic_facebook.png"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding IsVisible}"/>
+    </StackLayout>
 
 </ContentPage>

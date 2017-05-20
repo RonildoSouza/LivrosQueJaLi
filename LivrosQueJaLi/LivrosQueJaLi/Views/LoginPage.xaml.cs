@@ -11,7 +11,7 @@ namespace LivrosQueJaLi.Views
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel();
+            BindingContext = new LoginViewModel(Navigation);
         }
     }
 }

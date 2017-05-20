@@ -4,7 +4,6 @@
              x:Class="LivrosQueJaLi.App">
     <Application.Resources>
 
-        <!-- Application resource dictionary -->
         <ResourceDictionary>
             <Style x:Key="ButtonsSetting" TargetType="Button">
                 <Setter Property="BackgroundColor">
