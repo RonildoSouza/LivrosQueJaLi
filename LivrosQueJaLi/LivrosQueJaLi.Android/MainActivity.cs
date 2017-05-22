@@ -2,9 +2,6 @@
 
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using LivrosQueJaLi.Droid.Authentication;
 using Xamarin.Forms;
@@ -13,7 +10,7 @@ using Gcm.Client;
 
 namespace LivrosQueJaLi.Droid
 {
-    [Activity(Label = "Livros Que Já Li", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Livros Que Já Li", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         #region PushNotification

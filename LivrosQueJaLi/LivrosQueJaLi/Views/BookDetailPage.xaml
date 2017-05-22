@@ -34,20 +34,19 @@
             <StackLayout
                 Grid.Row="1"
                 Grid.Column="1">
+                <!--Style="{StaticResource ButtonsSetting}"-->
                 <Button
                     Text="Lido"
                     Command="{Binding ReadCommand}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
-                    Image="ic_check_black_36dp.png"
-                    Style="{StaticResource ButtonsSetting}"/>
+                    Image="ic_check_black_36dp.png"/>
                 <Button
                     Text="Desejo"
                     Command="{Binding WishCommand}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
-                    Image="ic_star_black_36dp.png"
-                    Style="{StaticResource ButtonsSetting}"/>
+                    Image="ic_star_black_36dp.png"/>
             </StackLayout>
 
             <Frame

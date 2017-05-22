@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace LivrosQueJaLi.Models
+﻿namespace LivrosQueJaLi.Models
 {
     public class Book
     {
