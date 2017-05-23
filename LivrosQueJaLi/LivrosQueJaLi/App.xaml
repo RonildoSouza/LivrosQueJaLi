@@ -5,7 +5,7 @@
     <Application.Resources>
 
         <ResourceDictionary>
-            <Style x:Key="ButtonsSetting" TargetType="Button">
+            <!--<Style x:Key="SettingButtons" TargetType="Button">
                 <Setter Property="BackgroundColor">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -23,6 +23,9 @@
                 </Setter>
 
                 <Setter Property="FontSize" Value="Large"/>
+            </Style>-->
+            <Style x:Key="SettingButtons" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium"/>
             </Style>
         </ResourceDictionary>
 

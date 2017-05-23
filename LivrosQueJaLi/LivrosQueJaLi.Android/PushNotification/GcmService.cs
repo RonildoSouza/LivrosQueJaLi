@@ -122,7 +122,7 @@ namespace LivrosQueJaLi.Droid
             //when the notification is tapped. 
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
                 //.SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
-                .SetSmallIcon(Resource.Drawable.icon)
+                .SetSmallIcon(Resource.Drawable.icon_np)
                 .SetTicker(title)
                 .SetContentTitle(title)
                 .SetContentText(desc)
