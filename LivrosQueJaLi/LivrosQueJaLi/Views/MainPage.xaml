@@ -5,14 +5,14 @@
              xmlns:vws="clr-namespace:LivrosQueJaLi.Views"
              Title="{Binding User.UserName, StringFormat='Olá {0}!'}">
 
-    <!--<TabbedPage.ToolbarItems>
+    <TabbedPage.ToolbarItems>
         <ToolbarItem
             Text="Logout"
             IsDestructive="True"
             Order="Secondary"
             Command="{Binding LogoutCommand}"
             Icon="ic_exit_to_app_white_48dp.png"/>
-    </TabbedPage.ToolbarItems>-->
+    </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>
         <vws:BooksSearchPage/>

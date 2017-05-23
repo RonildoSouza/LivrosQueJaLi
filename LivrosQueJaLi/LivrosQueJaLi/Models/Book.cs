@@ -13,7 +13,19 @@
         public string[] Authors { get; set; }
         public string Publisher { get; set; }
         public string PublishedDate { get; set; }
-        public string Description { get; set; }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                var vl = value.Replace("<br>", "\n")
+                    .Replace("<p>", "\t");
+                _description = vl;
+            }
+        }
+
         public int? PageCount { get; set; }
 
         ReadingModes _readingModes;

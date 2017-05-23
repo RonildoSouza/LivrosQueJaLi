@@ -7,5 +7,7 @@ namespace LivrosQueJaLi.Authentication
     {
         Task<MobileServiceUser> LoginAsync(
             IMobileServiceClient pClient, MobileServiceAuthenticationProvider pProvider);
+
+        Task LogoutAsync(IMobileServiceClient pClient);
     }
 }

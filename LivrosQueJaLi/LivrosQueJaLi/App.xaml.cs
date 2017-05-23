@@ -18,7 +18,7 @@ namespace LivrosQueJaLi
             if (Constants.User == null)
                 MainPage = new NavigationPage(new LoginPage());
             else
-                MainPage = new NavigationPage(new MainPage(Constants.User));
+                MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

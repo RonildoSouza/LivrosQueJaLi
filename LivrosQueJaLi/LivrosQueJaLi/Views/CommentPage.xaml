@@ -24,7 +24,6 @@
                 Text="Enviar"
                 Command="{Binding SendCommand}"
                 Image="ic_send_black_36dp.png"/>
-            <!--Style="{StaticResource ButtonsSetting}"-->
         </Grid>
     </ScrollView>
 

@@ -17,9 +17,21 @@ namespace LivrosQueJaLi.UWP.Authentication
                 var msUser = await pClient.LoginAsync(pProvider);
                 return msUser;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task LogoutAsync(IMobileServiceClient pClient)
+        {
+            try
+            {
+                await pClient.LogoutAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

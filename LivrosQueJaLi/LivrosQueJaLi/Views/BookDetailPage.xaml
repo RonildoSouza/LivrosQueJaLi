@@ -34,7 +34,6 @@
             <StackLayout
                 Grid.Row="1"
                 Grid.Column="1">
-                <!--Style="{StaticResource ButtonsSetting}"-->
                 <Button
                     Text="Lido"
                     Command="{Binding ReadCommand}"

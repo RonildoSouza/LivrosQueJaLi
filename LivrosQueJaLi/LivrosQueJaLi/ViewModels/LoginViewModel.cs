@@ -36,27 +36,35 @@ namespace LivrosQueJaLi.ViewModels
 
         private async void ExecuteLoginFBCommand()
         {
-            IsVisible = false;
-
-            var user = await _azureClient.LoginAsync();
-
-            if (user != null)
+            try
             {
-                IsBusy = true;
-                var userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+                IsVisible = false;
 
-                if (userDB == null)
+                var user = await _azureClient.LoginAsync();
+
+                if (user != null)
                 {
-                    _userDAL.InsertOrUpdate(user);
-                    userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+                    IsBusy = true;
+                    var userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+
+                    if (userDB == null)
+                    {
+                        _userDAL.InsertOrUpdate(user);
+                        userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+                    }
+
+                    user = userDB;
+                    Constants.User = user;
+                    IsBusy = false;
+
+                    await _navigation.PushAsync(new MainPage());
+                    RemovePageFromStack();
+
                 }
-
-                user = userDB;
-                Constants.User = user;
-                IsBusy = false;
-
-                await _navigation.PushAsync(new MainPage(user));
-                RemovePageFromStack();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
@@ -70,9 +78,6 @@ namespace LivrosQueJaLi.ViewModels
             }
         }
 
-        protected override Task FillObservableCollectionAsync()
-        {
-            throw new NotImplementedException();
-        }
+        protected override Task FillObservableCollectionAsync() => throw new NotImplementedException();
     }
 }

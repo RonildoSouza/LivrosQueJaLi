@@ -36,15 +36,23 @@ namespace LivrosQueJaLi.Services
                 var auth = DependencyService.Get<IAuthentication>();
                 var msUser = await auth.LoginAsync(_client, MobileServiceAuthenticationProvider.Facebook);
 
-                if (msUser != null)
+                if (msUser == null)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Application.Current.MainPage.DisplayAlert(
+                        "Erro", "Login Cancelado!", "OK");
+                    });
+                }
+                else
                 {
                     Settings.UserId = msUser.UserId;
                     Settings.AuthToken = msUser.MobileServiceAuthenticationToken;
 
-                    var profile = await _client
-                        .InvokeApiAsync("/.auth/me", System.Net.Http.HttpMethod.Get, null);
+                    // Obtém os dados do profile
+                    var profile = await _client.InvokeApiAsync("/.auth/me", HttpMethod.Get, null);
 
-                    // access_token 
+                    // Armazena access_token 
                     Settings.AccessToken = profile[0].Value<string>("access_token");
 
                     // Monta o array e busca o UserId e UserName do FB da estrutura JSON recebida.
@@ -65,18 +73,10 @@ namespace LivrosQueJaLi.Services
                         UserName = userName
                     };
                 }
-                else
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Erro", "Login Cancelado!", "OK");
-                    });
-                }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                throw new System.Exception(e.Message);
+                throw new Exception(e.Message);
             }
 
             return user;
@@ -84,19 +84,17 @@ namespace LivrosQueJaLi.Services
 
         public async Task LogoutAsync()
         {
-            if (!string.IsNullOrEmpty(Settings.UserId) && !string.IsNullOrEmpty(Settings.AuthToken))
-                _client.CurrentUser = new MobileServiceUser(Settings.UserId);
-
-            // Invalidate the token on the mobile backend
-            var authUri = new Uri($"{MobileAppUri}/.auth/logout");
-            using (var httpClient = new HttpClient())
+            try
             {
-                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", _client.CurrentUser.MobileServiceAuthenticationToken);
-                await httpClient.GetAsync(authUri);
-            }
+                if (!string.IsNullOrEmpty(Settings.UserId) && !string.IsNullOrEmpty(Settings.AuthToken))
+                    _client.CurrentUser = new MobileServiceUser(Settings.UserId);
 
-            // Remove the token from the MobileServiceClient
-            await _client.LogoutAsync();
+                await DependencyService.Get<IAuthentication>().LogoutAsync(_client);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

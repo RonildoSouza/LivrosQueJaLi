@@ -4,6 +4,7 @@ using Android.Content;
 using Microsoft.WindowsAzure.MobileServices;
 using LivrosQueJaLi.Droid.Authentication;
 using LivrosQueJaLi.Authentication;
+using Android.Webkit;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Authentication_Android))]
 namespace LivrosQueJaLi.Droid.Authentication
@@ -22,9 +23,22 @@ namespace LivrosQueJaLi.Droid.Authentication
                 var msUser = await pClient.LoginAsync(_context, pProvider);
                 return msUser;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task LogoutAsync(IMobileServiceClient pClient)
+        {
+            try
+            {
+                CookieManager.Instance.RemoveAllCookie();
+                await pClient.LogoutAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

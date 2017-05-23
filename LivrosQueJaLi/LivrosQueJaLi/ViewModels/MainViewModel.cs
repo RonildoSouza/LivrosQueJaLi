@@ -11,15 +11,14 @@ namespace LivrosQueJaLi.ViewModels
     {
         public Command LogoutCommand { get; }
 
-        public MainViewModel(User pUser)
+        public MainViewModel()
         {
             LogoutCommand = new Command(ExecuteLogoutCommand);
         }
 
-        private async void ExecuteLogoutCommand(object obj)
+        private async void ExecuteLogoutCommand()
         {
             await new AzureClient<User>().LogoutAsync();
-
             App.Current.MainPage = new NavigationPage(new LoginPage());
         }
 
