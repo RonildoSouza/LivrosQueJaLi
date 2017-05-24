@@ -11,21 +11,17 @@ namespace LivrosQueJaLi.Droid.Authentication
 {
     public class Authentication_Android : IAuthentication
     {
-        private Context _context;
-
-        public void Init(Context pContext) => _context = pContext;
-
         public async Task<MobileServiceUser> LoginAsync(
             IMobileServiceClient pClient, MobileServiceAuthenticationProvider pProvider)
         {
             try
             {
-                var msUser = await pClient.LoginAsync(_context, pProvider);
+                var msUser = await pClient.LoginAsync(Xamarin.Forms.Forms.Context, pProvider);
                 return msUser;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new Exception(e.Message);
+                return null;
             }
         }
 

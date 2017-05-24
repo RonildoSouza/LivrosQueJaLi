@@ -33,18 +33,22 @@ namespace LivrosQueJaLi.Services
 
             try
             {
+                MobileServiceUser msUser = null;
                 var auth = DependencyService.Get<IAuthentication>();
-                var msUser = await auth.LoginAsync(_client, MobileServiceAuthenticationProvider.Facebook);
 
-                if (msUser == null)
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Application.Current.MainPage.DisplayAlert(
-                        "Erro", "Login Cancelado!", "OK");
-                    });
-                }
+                if (string.IsNullOrEmpty(Settings.AuthToken) || string.IsNullOrEmpty(Settings.UserId))
+                    msUser = await auth.LoginAsync(_client, MobileServiceAuthenticationProvider.Facebook);
                 else
+                {
+                    msUser = new MobileServiceUser(Settings.UserId)
+                    {
+                        MobileServiceAuthenticationToken = Settings.AuthToken
+                    };
+
+                    _client.CurrentUser = msUser;
+                }
+
+                if (msUser != null)
                 {
                     Settings.UserId = msUser.UserId;
                     Settings.AuthToken = msUser.MobileServiceAuthenticationToken;
@@ -73,6 +77,14 @@ namespace LivrosQueJaLi.Services
                         UserName = userName
                     };
                 }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Application.Current.MainPage.DisplayAlert(
+                        "Login Cancelado", "Login Cancelado pelo usuário!", "OK");
+                    });    
+                }
             }
             catch (Exception e)
             {
@@ -89,6 +101,8 @@ namespace LivrosQueJaLi.Services
                 if (!string.IsNullOrEmpty(Settings.UserId) && !string.IsNullOrEmpty(Settings.AuthToken))
                     _client.CurrentUser = new MobileServiceUser(Settings.UserId);
 
+                Settings.AuthToken = string.Empty;
+                Settings.UserId = string.Empty;
                 await DependencyService.Get<IAuthentication>().LogoutAsync(_client);
             }
             catch (Exception e)

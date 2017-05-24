@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.BooksWishedPage"
              xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
-             Title="Livros Desejados">
+             Title="Livros Desejados"
+             Padding="10">
 
     <ext:ListView
         x:Name="listView"

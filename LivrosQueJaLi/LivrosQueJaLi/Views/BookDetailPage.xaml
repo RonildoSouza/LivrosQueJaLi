@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.BookDetailPage"
              Title="Detalhes">
+
     <ScrollView>
         <Grid Padding="10">
             <Grid.RowDefinitions>
@@ -70,4 +71,5 @@
             </Frame>
         </Grid>
     </ScrollView>
+
 </ContentPage>

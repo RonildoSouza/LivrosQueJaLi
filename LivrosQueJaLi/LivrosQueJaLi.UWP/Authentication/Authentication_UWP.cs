@@ -17,9 +17,9 @@ namespace LivrosQueJaLi.UWP.Authentication
                 var msUser = await pClient.LoginAsync(pProvider);
                 return msUser;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new Exception(e.Message);
+                return null;
             }
         }
 

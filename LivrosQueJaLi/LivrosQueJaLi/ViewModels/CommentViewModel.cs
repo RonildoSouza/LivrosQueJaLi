@@ -41,7 +41,7 @@ namespace LivrosQueJaLi.ViewModels
 
                 _commentDAL.InsertOrUpdate(comment);
 
-                DisplayAlertShow("Sucesso", "Comentário enviado com sucesso!");
+                DisplayAlertShow("Enviado", "Comentário enviado com sucesso!");
 
                 await App.Current.MainPage.Navigation.PopAsync();
             }

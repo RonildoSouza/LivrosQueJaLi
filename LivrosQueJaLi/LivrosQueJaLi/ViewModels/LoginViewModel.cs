@@ -59,7 +59,11 @@ namespace LivrosQueJaLi.ViewModels
 
                     await _navigation.PushAsync(new MainPage());
                     RemovePageFromStack();
-
+                }
+                else
+                {
+                    IsVisible = true;
+                    return;
                 }
             }
             catch (Exception e)

@@ -3,9 +3,6 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using LivrosQueJaLi.Droid.Authentication;
-using Xamarin.Forms;
-using LivrosQueJaLi.Authentication;
 using Gcm.Client;
 
 namespace LivrosQueJaLi.Droid
@@ -28,11 +25,10 @@ namespace LivrosQueJaLi.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
 
             #region SocialLogin
-            //Obtem o contexto para efetuar o login
-            ((Authentication_Android)DependencyService.Get<IAuthentication>()).Init(this);
+            //Obtem o contexto para efetuar o login 
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
             #endregion
 
             #region PushNotification
@@ -52,6 +48,8 @@ namespace LivrosQueJaLi.Droid
                 throw new Exception(e.Message);
             }
             #endregion
+
+            LoadApplication(new App());
         }
     }
 }
