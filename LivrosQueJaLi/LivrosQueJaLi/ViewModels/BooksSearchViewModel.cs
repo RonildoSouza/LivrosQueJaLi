@@ -32,7 +32,7 @@ namespace LivrosQueJaLi.ViewModels
 
         protected override async Task FillObservableCollectionAsync()
         {
-            IEnumerable<Book> books;
+            List<Book> books;
 
             if (string.IsNullOrEmpty(TextSearch))
                 books = await _googleBooksClient.GetBooksAsync();

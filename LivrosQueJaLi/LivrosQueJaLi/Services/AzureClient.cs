@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace LivrosQueJaLi.Services
 {
-    public class AzureClient<T>
+    public class AzureClient<T> where T : BaseEntity
     {
         private const string MobileAppUri = Constants.MobileAppUri;
         private IMobileServiceClient _client;
@@ -83,7 +83,7 @@ namespace LivrosQueJaLi.Services
                     {
                         await Application.Current.MainPage.DisplayAlert(
                         "Login Cancelado", "Login Cancelado pelo usuário!", "OK");
-                    });    
+                    });
                 }
             }
             catch (Exception e)

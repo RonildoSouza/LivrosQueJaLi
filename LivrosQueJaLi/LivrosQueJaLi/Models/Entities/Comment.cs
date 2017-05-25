@@ -13,6 +13,7 @@ namespace LivrosQueJaLi.Models.Entities
         [JsonProperty("Comment")]
         public string CommentText { get; set; }
 
+        [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
 
         [JsonIgnore]

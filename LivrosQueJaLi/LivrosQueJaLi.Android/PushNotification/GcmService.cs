@@ -34,13 +34,13 @@ namespace LivrosQueJaLi.Droid
     {
         //IMPORTANT: Change this to your own Sender ID!
         //The SENDER_ID is your Google API Console App Project Number
-        public static string[] SENDER_IDS = new string[] { "391818009539" };
+        public static string[] SENDER_IDS = new string[] { "881692420010" };
     }
 
     [Service] //Must use the service tag
     public class GcmService : GcmServiceBase
     {
-        MobileServiceClient client = new MobileServiceClient("http://apppushnotification.azurewebsites.net");
+        MobileServiceClient client = new MobileServiceClient(LivrosQueJaLi.Helpers.Constants.MobileAppUri);
         public static string RegistrationID { get; private set; }
 
         public GcmService() : base(GcmBroadcastReceiver.SENDER_IDS) { }

@@ -44,7 +44,7 @@ namespace LivrosQueJaLi.Services
             return book;
         }
 
-        public async Task<IEnumerable<Book>> GetBooksAsync(string pSearchTerm = "\"\"", int pStartIndex = 0)
+        public async Task<List<Book>> GetBooksAsync(string pSearchTerm = "\"\"", int pStartIndex = 0)
         {
             List<Book> books = null;
             var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=items(id,volumeInfo/title," +
@@ -60,10 +60,11 @@ namespace LivrosQueJaLi.Services
                     {
                         books = new List<Book>();
                         var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        var array = JObject.Parse(responseString).SelectToken("items").ToArray();
+                        var array = JObject.Parse(responseString).SelectToken("items")?.ToArray();
 
-                        for (int i = 0; i < array.Length; i++)
-                            books.Add(JsonConvert.DeserializeObject<Book>(array[i].ToString()));
+                        if (array != null)
+                            for (int i = 0; i < array.Length; i++)
+                                books.Add(JsonConvert.DeserializeObject<Book>(array[i].ToString()));
                     }
                 }
             }
