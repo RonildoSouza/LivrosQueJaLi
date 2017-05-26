@@ -1,3 +1,7 @@
 # Livros Que Já Li
 
-![Fluxograma](img/FluxogramaApp.png)
+* Android
+![FluxogramaAndroid](img/FluxogramaApp_Android.png)
+
+* UWP
+![FluxogramaUWP](img/FluxogramaApp_UWP.png)

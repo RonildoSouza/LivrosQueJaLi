@@ -43,7 +43,7 @@ namespace LivrosQueJaLi.DAL
             var userBooks = await _azureClient.Table
                 .Where(b => b.IdUser == pIdUser
                 && b.IsWish == pWish && b.IsRead != pWish)
-                .ToListAsync();
+                ?.ToListAsync();
 
             if (userBooks != null || userBooks.Count > 0)
             {
@@ -57,7 +57,7 @@ namespace LivrosQueJaLi.DAL
 
             return newListUserBooks
                 .OrderBy(ub => ub.Book.VolumeInfo.Title)
-                .ToList();
+                ?.ToList();
         }
 
         public async void DeleteUserBook(UserBook pUserBook) =>
