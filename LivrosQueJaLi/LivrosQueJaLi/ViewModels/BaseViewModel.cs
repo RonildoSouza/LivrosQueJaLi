@@ -7,7 +7,9 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -26,14 +28,28 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _isBusy, value); }
         }
 
+        private bool _isVisible = true;
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { SetProperty(ref _isVisible, value); }
+        }
+
         public User User { get { return Constants.User; } }
 
         public Command BookDetailCommand { get; private set; }
+        public Command PrivacyPolicyCommand { get; set; }
 
         public BaseViewModel()
         {
             Books = new ObservableRangeCollection<Book>();
             BookDetailCommand = new Command(ExecuteBookDetailCommand);
+            PrivacyPolicyCommand = new Command(ExecutePrivacyPolicyCommand);
+        }
+
+        private void ExecutePrivacyPolicyCommand()
+        {
+            throw new NotImplementedException();
         }
 
         protected virtual void ExecuteBookDetailCommand(object obj)
@@ -83,5 +99,29 @@ namespace LivrosQueJaLi.ViewModels
         protected async void DisplayAlertShow(string title, string message) =>
             await App.Current.MainPage
                 .DisplayAlert(title, message, "OK");
+
+        protected void RemovePageFromStack<T>(INavigation pNavigation)
+        {
+            var existingPages = pNavigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                if (page.GetType() == typeof(T))
+                    pNavigation.RemovePage(page);
+            }
+        }
+
+        protected bool ValidEmail(string pEmail)
+        {
+            var regex = new Regex(@"[\w\.-]+(\+[\w-]*)?@([\w-]+\.)+[\w-]+");
+            return regex.IsMatch(pEmail);
+        }
+
+        protected bool ValidPassword(string pPassword, string pConfirmPassword)
+        {
+            if (!string.IsNullOrEmpty(pPassword) && !string.IsNullOrEmpty(pConfirmPassword))
+                return pConfirmPassword.Equals(pPassword);
+
+            return false;
+        }
     }
 }

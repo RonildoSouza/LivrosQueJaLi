@@ -61,20 +61,25 @@ namespace LivrosQueJaLi.Services
 
                     // Monta o array e busca o UserId e UserName do FB da estrutura JSON recebida.
                     var a = JArray.Parse(profile[0]["user_claims"].ToString());
-                    string userId = "";
-                    string userName = "";
+                    string userId = string.Empty;
+                    string userName = string.Empty;
+                    string userEmail = string.Empty;
+
                     for (int i = 0; i < a.Count; i++)
                     {
                         if (a[i].Value<string>("typ").Contains("claims/nameidentifier"))
                             userId = a[i].Value<string>("val");
                         else if (a[i].Value<string>("typ").Contains("claims/name"))
                             userName = a[i].Value<string>("val");
+                        else if (a[i].Value<string>("typ").Contains("claims/emailaddress"))
+                            userEmail = a[i].Value<string>("val");
                     }
 
                     user = new User()
                     {
                         IdFacebook = userId,
-                        UserName = userName
+                        UserName = userName,
+                        Email = userEmail
                     };
                 }
                 else

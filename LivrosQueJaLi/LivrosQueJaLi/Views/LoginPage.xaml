@@ -11,16 +11,42 @@
         <ActivityIndicator 
             IsVisible="{Binding IsBusy}"
             IsRunning="{Binding IsBusy}"/>
+        
+            <StackLayout
+                IsVisible="{Binding IsVisible}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand">
+                <Entry
+                    Text="{Binding Email}"
+                    Placeholder="Informe seu Email"
+                    Keyboard="Email"/>
 
-        <Button
-            Text="Login com Facebook"
-            Command="{Binding LoginFBCommand}"
-            BackgroundColor="#3B5998"
-            TextColor="White"
-            FontSize="Large"
-            Image="ic_facebook.png"
-            HorizontalOptions="FillAndExpand"
-            IsVisible="{Binding IsVisible}"/>
+                <Entry
+                    Text="{Binding Password}"
+                    Placeholder="Informe sua Senha"
+                    IsPassword="True"/>
+
+                <Button
+                    Text="Login"
+                    Command="{Binding LoginCommand}"
+                    FontSize="Large"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Button
+                    Text="Cadastre-se"
+                    Command="{Binding RegisterCommand}"
+                    FontSize="Large"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Button
+                    Text="Login com Facebook"
+                    Command="{Binding LoginFBCommand}"
+                    BackgroundColor="#3B5998"
+                    TextColor="White"
+                    FontSize="Large"
+                    Image="ic_facebook.png"
+                    HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
     </StackLayout>
 
 </ContentPage>

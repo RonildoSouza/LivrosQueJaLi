@@ -10,6 +10,10 @@ namespace LivrosQueJaLi.Models.Entities
         public string IdBook { get; set; }
         public bool IsRead { get; set; }
         public bool IsWish { get; set; }
+        public bool Lent { get; set; }
+        public bool Borrowed { get; set; }
+        public bool Seeling { get; set; }
+        public bool Sold { get; set; }
 
         [JsonIgnore]
         public Book Book { get; set; }

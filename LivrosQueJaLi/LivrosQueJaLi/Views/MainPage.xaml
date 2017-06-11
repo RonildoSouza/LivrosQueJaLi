@@ -7,6 +7,10 @@
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem
+            Text="Meus Amigos"
+            Command="{Binding FriendsCommand}"
+            Icon="ic_people_white_48dp.png"/>
+        <ToolbarItem
             Text="Logout"
             IsDestructive="True"
             Order="Secondary"

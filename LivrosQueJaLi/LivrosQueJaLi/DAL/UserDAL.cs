@@ -1,6 +1,8 @@
-﻿using LivrosQueJaLi.Models.Entities;
+﻿using LivrosQueJaLi.Helpers;
+using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +18,10 @@ namespace LivrosQueJaLi.DAL
         {
             try
             {
-                await _azureClient.Table.InsertAsync(obj);
+                if (string.IsNullOrEmpty(obj.Id))
+                    await _azureClient.Table.InsertAsync(obj);
+                else
+                    await _azureClient.Table.UpdateAsync(obj);
             }
             catch (Exception e)
             {
@@ -24,10 +29,19 @@ namespace LivrosQueJaLi.DAL
             }
         }
 
-        public async Task<User> SelectByIdFacebookAsync(string pIdFacebook)
+        public async Task<User> SelectByIdFacebookOrEmailAsync(string pIdFacebook, string pEmail)
         {
             var usr = await _azureClient.Table
-                .Where(u => u.IdFacebook == pIdFacebook)
+                .Where(u => u.IdFacebook == pIdFacebook || u.Email == pEmail)
+                .ToListAsync();
+
+            return usr.FirstOrDefault();
+        }
+
+        public async Task<User> SelectByIdAsync(string pIdUser)
+        {
+            var usr = await _azureClient.Table
+                .Where(u => u.Id == pIdUser)
                 .ToListAsync();
 
             return usr.FirstOrDefault();

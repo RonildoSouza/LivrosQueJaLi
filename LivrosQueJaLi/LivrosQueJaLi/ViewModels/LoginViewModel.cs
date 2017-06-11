@@ -1,37 +1,86 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using EnviaEmailDLL.Modelo.Logica;
 using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using LivrosQueJaLi.Views;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace LivrosQueJaLi.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private User _user;
         private UserDAL _userDAL;
+        private FriendDAL _friendDAL;
         private INavigation _navigation;
         private AzureClient<User> _azureClient;
 
-        private bool _isVisible = true;
-        public bool IsVisible
+        private string _email = string.Empty;
+        public string Email
         {
-            get { return _isVisible; }
-            set { SetProperty(ref _isVisible, value); }
+            get { return _email?.Trim(); }
+            set { SetProperty(ref _email, value?.Trim()); }
         }
 
-        public Command LoginFBCommand { get; set; }
+        private string _password = string.Empty;
+        public string Password
+        {
+            get { return _password?.Trim(); }
+            set { SetProperty(ref _password, value?.Trim()); }
+        }
+
+        public Command LoginCommand { get; }
+        public Command RegisterCommand { get; }
+        public Command LoginFBCommand { get; }
 
         public LoginViewModel(INavigation pNavigation)
         {
             _userDAL = new UserDAL();
+            _friendDAL = new FriendDAL();
             _navigation = pNavigation;
             _azureClient = new AzureClient<User>();
 
+            LoginCommand = new Command(ExecuteLoginCommand);
+            RegisterCommand = new Command(ExecuteRegisterCommand);
             LoginFBCommand = new Command(ExecuteLoginFBCommand);
+        }
+
+        private async void ExecuteLoginCommand()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+                {
+                    IsBusy = true;
+                    IsVisible = false;
+                    _user = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
+
+                    var password = _user.Password ?? string.Empty;
+                    var passwordDecrypt = Encryption.DecryptAes(password);
+                    if (_user != null && Password.Equals((passwordDecrypt)) && ValidEmail(Email))
+                        await NavigationToMainPage();
+                    else
+                    {
+                        IsBusy = false;
+                        IsVisible = true;
+                        DisplayAlertShow("Falha no Login", "Email e/ou Senha inválido!");
+                    }
+                }
+                else
+                    DisplayAlertShow("Campos Vazios", "Email e/ou Senha não informados!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private async void ExecuteRegisterCommand()
+        {
+            await _navigation.PushAsync(new RegisterPage());
         }
 
         private async void ExecuteLoginFBCommand()
@@ -40,25 +89,25 @@ namespace LivrosQueJaLi.ViewModels
             {
                 IsVisible = false;
 
-                var user = await _azureClient.LoginAsync();
+                _user = await _azureClient.LoginAsync();
 
-                if (user != null)
+                if (_user != null)
                 {
                     IsBusy = true;
-                    var userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+                    _user.Photo = $"https://graph.facebook.com/{_user.IdFacebook}/picture?type=normal&hc_location=ufi";
+                    var userDB = await _userDAL.SelectByIdFacebookOrEmailAsync(_user.IdFacebook, _user.Email);
 
-                    if (userDB == null)
+                    if (userDB != null && string.IsNullOrEmpty(userDB.IdFacebook))
                     {
-                        _userDAL.InsertOrUpdate(user);
-                        userDB = await _userDAL.SelectByIdFacebookAsync(user.IdFacebook);
+                        _user.Id = userDB.Id;
+                        _user.Password = userDB.Password;
+                        userDB = await InsertOrUpdateAndGetUser(_user, userDB);
                     }
+                    else
+                        userDB = await InsertOrUpdateAndGetUser(_user, userDB);
 
-                    user = userDB;
-                    Constants.User = user;
-                    IsBusy = false;
-
-                    await _navigation.PushAsync(new MainPage());
-                    RemovePageFromStack();
+                    _user = userDB;
+                    await NavigationToMainPage();
                 }
                 else
                 {
@@ -72,14 +121,21 @@ namespace LivrosQueJaLi.ViewModels
             }
         }
 
-        private void RemovePageFromStack()
+        private async Task NavigationToMainPage()
         {
-            var existingPages = _navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
-            {
-                if (page.GetType() == typeof(LoginPage))
-                    _navigation.RemovePage(page);
-            }
+            _user.Friends = await _friendDAL.SelectUserFriendsAsync(_user);
+            Constants.User = _user;
+            IsBusy = false;
+
+            await _navigation.PushAsync(new MainPage());
+            RemovePageFromStack<LoginPage>(_navigation);
+        }
+
+        private async Task<User> InsertOrUpdateAndGetUser(User user, User userDB)
+        {
+            _userDAL.InsertOrUpdate(user);
+            userDB = await _userDAL.SelectByIdFacebookOrEmailAsync(user.IdFacebook, user.Email);
+            return userDB;
         }
 
         protected override Task FillObservableCollectionAsync() => throw new NotImplementedException();

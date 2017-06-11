@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LivrosQueJaLi.Views.RegisterPage"
+             Title="Cadastro de Usuário">
+
+    <StackLayout
+        Padding="10"
+        VerticalOptions="CenterAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <ActivityIndicator 
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"/>
+        <StackLayout
+            IsVisible="{Binding IsVisible}"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand">
+            <Entry
+                Text="{Binding Name}"
+                Placeholder="Informe seu Nome"/>
+
+            <Entry
+                Text="{Binding Email}"
+                Placeholder="Informe seu Email"
+                Keyboard="Email"/>
+
+            <Entry
+                Text="{Binding Password}"
+                Placeholder="Informe uma Senha"
+                IsPassword="True"/>
+
+            <Entry
+                Text="{Binding ConfirmPassword}"
+                Placeholder="Confirme a Senha"
+                IsPassword="True"/>
+
+            <Button
+                Text="Cadastre-se"
+                Command="{Binding RegisterCommand}"
+                FontSize="Large"
+                HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

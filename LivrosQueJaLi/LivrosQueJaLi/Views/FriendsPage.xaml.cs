@@ -5,12 +5,12 @@ using Xamarin.Forms.Xaml;
 namespace LivrosQueJaLi.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : TabbedPage
+    public partial class FriendsPage : ContentPage
     {
-        public MainPage()
+        public FriendsPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel(Navigation);
+            BindingContext = new FriendsViewModel();
         }
     }
 }

@@ -31,9 +31,9 @@ namespace TesteLivrosQueJaLi.DAL
         }
 
         [TestCase]
-        public async Task SelectUserByIdFacebook()
+        public async Task SelectByIdFacebookOrEmail()
         {
-            var usr = await _userDAL.SelectByIdFacebookAsync("abc123");
+            var usr = await _userDAL.SelectByIdFacebookOrEmailAsync("abc123", "");
 
             Assert.IsNotNull(usr);
         }
