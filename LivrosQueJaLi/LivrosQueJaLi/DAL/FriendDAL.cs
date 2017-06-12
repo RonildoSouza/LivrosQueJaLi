@@ -53,7 +53,7 @@ namespace LivrosQueJaLi.DAL
 
         public async Task<List<User>> SelectUserFriendsAsync(User pUser)
         {
-            List<User> users = new List<User>();
+            List<User> users = null;
 
             var friends = await _azureClient.Table
                 .Where(f => f.IdUser == pUser.Id)

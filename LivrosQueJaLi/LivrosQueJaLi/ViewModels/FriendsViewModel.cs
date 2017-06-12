@@ -28,10 +28,13 @@ namespace LivrosQueJaLi.ViewModels
         {
             _userDAL = new UserDAL();
             _friendDAL = new FriendDAL();
-            Friends = new ObservableRangeCollection<User>(User.Friends);
+            Friends = new ObservableRangeCollection<User>();
             SearchCommand = new Command(ExecuteSearchCommand);
             AddFriendCommand = new Command(ExecuteAddFriendCommand);
             RemoveFriendCommand = new Command(ExecuteRemoveFriendCommand);
+
+            if (User?.Friends != null && User?.Friends.Count > 0)
+                Friends.ReplaceRange(User.Friends);
         }
 
         private void ExecuteSearchCommand(object obj) => FillListView(FillObservableCollectionAsync);
