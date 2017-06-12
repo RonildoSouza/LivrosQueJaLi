@@ -2,8 +2,8 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using System;
-using Xamarin.Forms;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -25,13 +25,20 @@ namespace LivrosQueJaLi.ViewModels
             set { SetProperty(ref _authors, value); }
         }
 
-        public Command ReadCommand { get; }
+        private string _price = string.Empty;
+        public string Price
+        {
+            get { return _price; }
+            set { SetProperty(ref _price, value); }
+        }
 
+        public Command ReadCommand { get; }
         public Command WishCommand { get; }
 
         public BookDetailViewModel(Book pBook)
         {
             Book = pBook;
+            _price = $"{Book.SaleInfo.RetailPrice.CurrencyCode} {Book.SaleInfo.RetailPrice.Amount}";
             _userBookDAL = new UserBookDAL();
             ReadCommand = new Command(ExecuteReadCommand);
             WishCommand = new Command(ExecuteWishCommand);

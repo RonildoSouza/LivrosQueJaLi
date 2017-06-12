@@ -153,7 +153,6 @@
     <Content Include="ic_comment_white_48dp.png" />
     <Content Include="ic_exit_to_app_white_48dp.png" />
     <Content Include="ic_facebook.png" />
-    <Content Include="ic_people_white_48dp.png" />
     <Content Include="ic_send_black_36dp.png" />
     <Content Include="ic_star_black_36dp.png" />
     <Content Include="noimage_100_100.png" />

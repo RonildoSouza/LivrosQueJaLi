@@ -13,7 +13,6 @@ namespace LivrosQueJaLi.ViewModels
     public class RegisterViewModel : BaseViewModel
     {
         private UserDAL _userDAL;
-        private FriendDAL _friendDAL;
         private INavigation _navigation;
 
         private string _name = string.Empty;
@@ -50,7 +49,6 @@ namespace LivrosQueJaLi.ViewModels
         {
             _navigation = pNavigation;
             _userDAL = new UserDAL();
-            _friendDAL = new FriendDAL();
             RegisterCommand = new Command(ExecuteRegisterCommand);
         }
 
@@ -75,7 +73,6 @@ namespace LivrosQueJaLi.ViewModels
                     {
                         usr.Password = user.Password;
                         user = usr;
-                        user.Friends = await _friendDAL.SelectUserFriendsAsync(user);
                         usr = null;
                     }
 

@@ -4,6 +4,22 @@
     {
         public string Id { get; set; }
         public VolumeInfo VolumeInfo { get; set; }
+
+        private SaleInfo _saleInfo;
+        public SaleInfo SaleInfo
+        {
+            get
+            {
+                if (_saleInfo == null)
+                    _saleInfo = new SaleInfo()
+                    {
+                        RetailPrice = new RetailPrice() { Amount = 0F, CurrencyCode = "Valor Indisponível." }
+                    };
+
+                return _saleInfo;
+            }
+            set { _saleInfo = value; }
+        }
     }
 
     public class VolumeInfo
@@ -80,4 +96,16 @@
             set { _small = value; }
         }
     }
+
+    public class SaleInfo
+    {
+        public RetailPrice RetailPrice { get; set; }
+    }
+
+    public class RetailPrice
+    {
+        public float Amount { get; set; }
+        public string CurrencyCode { get; set; }
+    }
+
 }

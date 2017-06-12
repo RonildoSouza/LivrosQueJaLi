@@ -60,6 +60,7 @@
                     <Label Text="{Binding Book.VolumeInfo.PublishedDate, StringFormat='Data de Publicação: {0}'}"/>
                     <Label Text="{Binding Book.VolumeInfo.PageCount, StringFormat='Quantidade de Páginas: {0}'}"/>
                     <Label Text="{Binding Book.VolumeInfo.Language, StringFormat='Idioma: {0}'}"/>
+                    <Label Text="{Binding Price, StringFormat='Preço: {0}'}"/>
                 </StackLayout>
             </Frame>
 

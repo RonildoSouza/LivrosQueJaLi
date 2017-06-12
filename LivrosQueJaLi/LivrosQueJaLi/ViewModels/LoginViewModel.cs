@@ -14,7 +14,6 @@ namespace LivrosQueJaLi.ViewModels
     {
         private User _user;
         private UserDAL _userDAL;
-        private FriendDAL _friendDAL;
         private INavigation _navigation;
         private AzureClient<User> _azureClient;
 
@@ -39,7 +38,6 @@ namespace LivrosQueJaLi.ViewModels
         public LoginViewModel(INavigation pNavigation)
         {
             _userDAL = new UserDAL();
-            _friendDAL = new FriendDAL();
             _navigation = pNavigation;
             _azureClient = new AzureClient<User>();
 
@@ -123,7 +121,6 @@ namespace LivrosQueJaLi.ViewModels
 
         private async Task NavigationToMainPage()
         {
-            _user.Friends = await _friendDAL.SelectUserFriendsAsync(_user);
             Constants.User = _user;
             IsBusy = false;
 

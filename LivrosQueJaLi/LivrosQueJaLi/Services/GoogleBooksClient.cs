@@ -50,7 +50,7 @@ namespace LivrosQueJaLi.Services
             var url = $"{UrlGoogleBooksAPI}?q={pSearchTerm}&fields=items(id,volumeInfo/title," +
                 $"volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publisher,volumeInfo/publishedDate," +
                 $"volumeInfo/description,volumeInfo/pageCount,volumeInfo/imageLinks/thumbnail," +
-                $"volumeInfo/readingModes,volumeInfo/language)&maxResults=40&startIndex={pStartIndex}";
+                $"volumeInfo/readingModes,volumeInfo/language,saleInfo/retailPrice)&maxResults=40&startIndex={pStartIndex}";
 
             try
             {
