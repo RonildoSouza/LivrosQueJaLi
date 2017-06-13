@@ -1,4 +1,5 @@
 ﻿using LivrosQueJaLi.Helpers;
+using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using System;
@@ -10,9 +11,14 @@ namespace LivrosQueJaLi.DAL
 {
     public class UserDAL : IBaseDAL<User>
     {
+        private UserBookDAL _userBookDAL;
         private AzureClient<User> _azureClient;
 
-        public UserDAL() => _azureClient = new AzureClient<User>();
+        public UserDAL()
+        {
+            _userBookDAL = new UserBookDAL();
+            _azureClient = new AzureClient<User>();
+        }
 
         public async void InsertOrUpdate(User obj)
         {
@@ -45,6 +51,26 @@ namespace LivrosQueJaLi.DAL
                 .ToListAsync();
 
             return usr.FirstOrDefault();
+        }
+
+        public async Task<List<User>> SelectUsersWhoReadBookAsync(Book pBook)
+        {
+            List<User> users = await _azureClient.Table.ToListAsync();
+            List<UserBook> userBooks = await _userBookDAL.SelectAll();
+
+            //var usersRead = users.Join(userBooks,
+            //    u => u.Id,
+            //    ub => ub.IdUser,
+            //    (u, ub) => new { User = u, UserBook = ub })
+            //    .Where(j => j.UserBook.IdBook == pIdBook)
+            //    .ToList();
+
+            var usersRead = from u in users
+                            join ub in userBooks on u.Id equals ub.IdUser
+                            where ub.IdBook == pBook.Id && ub.IsRead == true
+                            select u;
+
+            return usersRead?.ToList();
         }
     }
 }

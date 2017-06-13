@@ -34,7 +34,7 @@ namespace LivrosQueJaLi.ViewModels
             {
                 var comment = new Comment()
                 {
-                    UserComment = User.UserName,
+                    IdUserComment = User.UserName,
                     IdBook = _book.Id,
                     CommentText = EditorText
                 };

@@ -2,6 +2,7 @@
 using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.DAL
@@ -26,7 +27,9 @@ namespace LivrosQueJaLi.DAL
 
         public async Task<List<Comment>> SelectBookCommentsAsync(string pIdBook)
         {
-            var comments = await _azureClient.Table.Where(c => c.IdBook == pIdBook).ToListAsync();
+            var comments = await _azureClient.Table.Where(c => c.IdBook == pIdBook)
+                .OrderByDescending(c => c.CreatedAt)?.ToListAsync();
+
             return comments;
         }
     }

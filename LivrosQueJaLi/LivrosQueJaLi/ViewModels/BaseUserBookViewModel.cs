@@ -8,7 +8,7 @@ namespace LivrosQueJaLi.ViewModels
 {
     public class BaseUserBookViewModel : BaseViewModel
     {
-        private UserBookDAL _userBookDAL;          
+        private UserBookDAL _userBookDAL;
 
         public Command RefreshCommand { get; }
 
@@ -18,7 +18,7 @@ namespace LivrosQueJaLi.ViewModels
         {
             _userBookDAL = new UserBookDAL();
             RefreshCommand = new Command(ExecuteRefreshCommand);
-            RemoveUserBookCommand = new Command(ExecuteRemoveUserBookCommand);            
+            RemoveUserBookCommand = new Command(ExecuteRemoveUserBookCommand);
         }
 
         private void ExecuteRefreshCommand() => FillListView(FillObservableCollectionAsync);

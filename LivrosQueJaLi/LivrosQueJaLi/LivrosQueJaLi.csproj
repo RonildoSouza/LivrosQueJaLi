@@ -41,6 +41,7 @@
     <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="DAL\CommentDAL.cs" />
     <Compile Include="DAL\IBaseDAL.cs" />
+    <Compile Include="DAL\NegotiationDAL.cs" />
     <Compile Include="DAL\UserBookDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Helpers\Constants.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
+    <Compile Include="Models\Entities\Negotiation.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\UserBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\WhoReadViewModel.cs" />
     <Compile Include="Views\BookCommentsPage.xaml.cs">
       <DependentUpon>BookCommentsPage.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,9 @@
     </Compile>
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WhoReadPage.xaml.cs">
+      <DependentUpon>WhoReadPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +219,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RegisterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\WhoReadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

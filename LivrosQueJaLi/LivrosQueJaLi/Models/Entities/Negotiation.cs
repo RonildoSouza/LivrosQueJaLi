@@ -4,12 +4,12 @@ using System;
 
 namespace LivrosQueJaLi.Models.Entities
 {
-    [DataTable(nameof(Comment))]
-    public class Comment : BaseEntity
+    [DataTable(nameof(Negotiation))]
+    public class Negotiation : BaseEntity
     {
-        public string IdBook { get; set; }
-        public string IdUserComment { get; set; }
-        public string CommentText { get; set; }
+        public string IdUserBook { get; set; }
+        public string IdUserInterested { get; set; }
+        public string Message { get; set; }
 
         [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }

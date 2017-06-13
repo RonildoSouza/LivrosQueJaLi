@@ -23,7 +23,7 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell
-                    Text="{Binding UserAndDate}"
+                    Text="{Binding CreatedAt}"
                     Detail="{Binding CommentText}"/>
             </DataTemplate>
         </ListView.ItemTemplate>

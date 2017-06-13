@@ -4,7 +4,6 @@ using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Views;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -64,8 +63,7 @@ namespace LivrosQueJaLi.ViewModels
                     {
                         UserName = Name,
                         Email = this.Email,
-                        Password = Encryption.EncryptAes(this.Password),
-                        Friends = new List<User>()
+                        Password = Encryption.EncryptAes(this.Password)
                     };
 
                     var usr = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);

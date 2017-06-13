@@ -32,6 +32,6 @@ namespace LivrosQueJaLi.Models.Entities
         public string Password { get; set; }
 
         [JsonIgnore]
-        public List<User> Friends { get; set; }
+        public List<UserBook> UserBooks { get; set; }
     }
 }

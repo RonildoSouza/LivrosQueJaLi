@@ -39,7 +39,7 @@ namespace TesteLivrosQueJaLi.DAL
             var com = new Comment()
             {
                 IdBook = "N0T0CgAAQBAJ",
-                UserComment = "Usuário NUnit",
+                IdUserComment = "Usuário NUnit",
                 CommentText = "Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, " +
                 "Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit" +
                 ", Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit...",
@@ -56,7 +56,7 @@ namespace TesteLivrosQueJaLi.DAL
         {
             _commentDAL.InsertOrUpdate(new Comment()
             {                   
-                UserComment = "Usuário NUnit",
+                IdUserComment = "Usuário NUnit",
                 CommentText = "Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, " +
                 "Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit" +
                 ", Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit, Teste NUnit..."

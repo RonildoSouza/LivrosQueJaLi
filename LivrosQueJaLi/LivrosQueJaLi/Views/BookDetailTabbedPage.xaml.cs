@@ -1,6 +1,5 @@
 ﻿using LivrosQueJaLi.Models;
 using LivrosQueJaLi.ViewModels;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +15,7 @@ namespace LivrosQueJaLi.Views
 
             Children.Add(new BookDetailPage(pBook));
             Children.Add(new BookCommentsPage(pBook));
+            Children.Add(new WhoReadPage(pBook));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using LivrosQueJaLi.Models.Entities;
+﻿using LivrosQueJaLi.Models;
+using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
@@ -39,13 +40,14 @@ namespace LivrosQueJaLi.DAL
 
         public async Task<List<UserBook>> SelectUserBooksAsync(string pIdUser, bool pWish = false)
         {
-            List<UserBook> newListUserBooks = null;
+            List<UserBook> newListUserBooks = new List<UserBook>();
+
             var userBooks = await _azureClient.Table
-                .Where(b => b.IdUser == pIdUser
-                && b.IsWish == pWish && b.IsRead != pWish)
+                .Where(ub => ub.IdUser == pIdUser
+                && ub.IsWish == pWish && ub.IsRead != pWish)
                 ?.ToListAsync();
 
-            if (userBooks != null || userBooks.Count > 0)
+            if (userBooks != null && userBooks.Count > 0)
             {
                 newListUserBooks = new List<UserBook>();
                 foreach (var userBook in userBooks)
@@ -59,6 +61,9 @@ namespace LivrosQueJaLi.DAL
                 .OrderBy(ub => ub.Book.VolumeInfo.Title)
                 ?.ToList();
         }
+
+        public async Task<List<UserBook>> SelectAll() =>
+            await _azureClient.Table.ToListAsync();
 
         public async void DeleteUserBook(UserBook pUserBook) =>
             await _azureClient.Table.DeleteAsync(pUserBook);
