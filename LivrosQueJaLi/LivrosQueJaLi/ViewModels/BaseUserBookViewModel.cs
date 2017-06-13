@@ -11,7 +11,6 @@ namespace LivrosQueJaLi.ViewModels
         private UserBookDAL _userBookDAL;
 
         public Command RefreshCommand { get; }
-
         public Command RemoveUserBookCommand { get; }
 
         public BaseUserBookViewModel()

@@ -53,24 +53,32 @@ namespace LivrosQueJaLi.DAL
             return usr.FirstOrDefault();
         }
 
-        public async Task<List<User>> SelectUsersWhoReadBookAsync(Book pBook)
+        public async Task<List<dynamic>> SelectUsersWhoReadBookAsync(Book pBook)
         {
             List<User> users = await _azureClient.Table.ToListAsync();
             List<UserBook> userBooks = await _userBookDAL.SelectAll();
 
-            //var usersRead = users.Join(userBooks,
-            //    u => u.Id,
-            //    ub => ub.IdUser,
-            //    (u, ub) => new { User = u, UserBook = ub })
-            //    .Where(j => j.UserBook.IdBook == pIdBook)
-            //    .ToList();
+            var usersRead = users.Join(userBooks,
+                u => u.Id,
+                ub => ub.IdUser,
+                (u, ub) => new { User = u, UserBook = ub })
+                .Where(j => j.UserBook.IdBook == pBook.Id)
+                .ToList();
 
-            var usersRead = from u in users
-                            join ub in userBooks on u.Id equals ub.IdUser
-                            where ub.IdBook == pBook.Id && ub.IsRead == true
-                            select u;
-
-            return usersRead?.ToList();
+            return usersRead?.ToList<dynamic>();
         }
+
+        //public async Task<List<User>> SelectUsersWhoReadBookAsync(Book pBook)
+        //{
+        //    List<User> users = await _azureClient.Table.ToListAsync();
+        //    List<UserBook> userBooks = await _userBookDAL.SelectAll();
+
+        //    var usersRead = from u in users
+        //                    join ub in userBooks on u.Id equals ub.IdUser
+        //                    where ub.IdBook == pBook.Id && ub.IsRead == true
+        //                    select u;
+
+        //    return usersRead?.ToList();
+        //}
     }
 }

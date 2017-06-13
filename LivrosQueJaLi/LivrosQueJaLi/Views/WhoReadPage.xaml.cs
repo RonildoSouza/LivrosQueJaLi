@@ -13,5 +13,11 @@ namespace LivrosQueJaLi.Views
             InitializeComponent();
             BindingContext = new WhoReadViewModel(pBook);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as WhoReadViewModel)?.RefreshUsersCommand.Execute(null);
+        }
     }
 }

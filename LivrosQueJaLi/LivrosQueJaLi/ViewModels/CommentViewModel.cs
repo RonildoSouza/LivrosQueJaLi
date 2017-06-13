@@ -34,7 +34,7 @@ namespace LivrosQueJaLi.ViewModels
             {
                 var comment = new Comment()
                 {
-                    IdUserComment = User.UserName,
+                    IdUserComment = User.Id,
                     IdBook = _book.Id,
                     CommentText = EditorText
                 };
@@ -51,9 +51,6 @@ namespace LivrosQueJaLi.ViewModels
             }
         }
 
-        protected override Task FillObservableCollectionAsync()
-        {
-            throw new NotImplementedException();
-        }
+        protected override Task FillObservableCollectionAsync() => throw new NotImplementedException();
     }
 }

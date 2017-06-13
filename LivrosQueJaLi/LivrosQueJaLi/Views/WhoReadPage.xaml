@@ -8,16 +8,18 @@
 
     <ext:ListView
         x:Name="listView"
+        IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Users}"
+        RefreshCommand="{Binding RefreshUsersCommand}"
         IsPullToRefreshEnabled="True">
-        <!--IsRefreshing="{Binding IsBusy}"-->
-        <!--ItemTappedCommand="{Binding BookDetailCommand}"-->
-        <!--RefreshCommand="{Binding RefreshCommand}"-->
+        <!--ItemTappedCommand="{Binding UserDetailCommand}"-->
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ImageCell
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                     ImageSource="{Binding Photo}"
-                    Text="{Binding UserName}"/>
+                    Text="{Binding UserName}"
+                    Detail="{Binding LentOrSeeling, Mode=TwoWay}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ext:ListView>
