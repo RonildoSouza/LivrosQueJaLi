@@ -19,9 +19,16 @@ namespace LivrosQueJaLi.DAL
             _azureClient = new AzureClient<Negotiation>();
         }
 
-        public void InsertOrUpdate(Negotiation obj)
+        public async void InsertOrUpdate(Negotiation obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _azureClient.Table.InsertAsync(obj);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<List<Negotiation>> SelectNegotiations(string pIdUser, string pIdBook)
@@ -29,7 +36,7 @@ namespace LivrosQueJaLi.DAL
             var userBook = await _userBookDAL.SelectUserBookByIds(pIdUser, pIdBook);
             var negotiations = await _azureClient.Table
                 .Where(n => n.IdUserBook == userBook.Id)
-                .OrderByDescending(n => n.CreatedAt)?.ToListAsync();
+                .OrderBy(n => n.CreatedAt)?.ToListAsync();
 
             return negotiations;
         }

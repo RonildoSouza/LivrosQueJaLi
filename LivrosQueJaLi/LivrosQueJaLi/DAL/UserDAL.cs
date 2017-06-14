@@ -1,5 +1,4 @@
-﻿using LivrosQueJaLi.Helpers;
-using LivrosQueJaLi.Models;
+﻿using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using System;
@@ -38,8 +37,8 @@ namespace LivrosQueJaLi.DAL
         public async Task<User> SelectByIdFacebookOrEmailAsync(string pIdFacebook, string pEmail)
         {
             var usr = await _azureClient.Table
-                .Where(u => u.IdFacebook == pIdFacebook || u.Email == pEmail)
-                .ToListAsync();
+                    .Where(u => u.IdFacebook == pIdFacebook || u.Email == pEmail)
+                    ?.ToListAsync();
 
             return usr.FirstOrDefault();
         }
@@ -48,7 +47,7 @@ namespace LivrosQueJaLi.DAL
         {
             var usr = await _azureClient.Table
                 .Where(u => u.Id == pIdUser)
-                .ToListAsync();
+                ?.ToListAsync();
 
             return usr.FirstOrDefault();
         }

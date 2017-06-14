@@ -11,15 +11,28 @@
         IsRefreshing="{Binding IsBusy}"
         ItemsSource="{Binding Users}"
         RefreshCommand="{Binding RefreshUsersCommand}"
+        ItemTappedCommand="{Binding UserDetailCommand}"
         IsPullToRefreshEnabled="True">
-        <!--ItemTappedCommand="{Binding UserDetailCommand}"-->
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ImageCell
-                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                    ImageSource="{Binding Photo}"
-                    Text="{Binding UserName}"
-                    Detail="{Binding LentOrSeeling, Mode=TwoWay}"/>
+                <ViewCell>
+                    <StackLayout                        
+                        Orientation="Horizontal">
+                        <Image Source="{Binding Photo}"/>
+                        <StackLayout 
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="StartAndExpand"
+                            Orientation="Vertical">
+                            <Label
+                                Text="{Binding UserName}"
+                                FontSize="Large"/>
+                            <Label
+                                Text="{Binding LentOrSeeling}"
+                                HorizontalTextAlignment="Center"
+                                FontSize="Medium"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ext:ListView>

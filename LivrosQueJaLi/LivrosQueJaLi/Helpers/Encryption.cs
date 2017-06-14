@@ -7,17 +7,15 @@ namespace EnviaEmailDLL.Modelo.Logica
 {
     public static class Encryption
     {
-        static byte[] saltValueBytes = Encoding.UTF8.GetBytes("123$%4567");
+        static byte[] saltValueBytes = Encoding.UTF8.GetBytes("123$%45678912345");
         static readonly string password = "AIspJl16W+JOJkeYFAmD2S0AsR3ijJZ9JqpH2lMm57CS+ptz/Sw=";
         static byte[] key = CreateDerivedKey(password);
         static ISymmetricKeyAlgorithmProvider aes = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
         static ICryptographicKey symetricKey = aes.CreateSymmetricKey(key);
 
-
-        private static byte[] CreateDerivedKey(string encryptionKey, int keyLengthInBytes = 128, int iterations = 1000)
+        private static byte[] CreateDerivedKey(string encryptionKey, int keyLengthInBytes = 16, int iterations = 1000)
         {
             byte[] key = NetFxCrypto.DeriveBytes.GetBytes(encryptionKey, saltValueBytes, iterations, keyLengthInBytes);
-            string chave = Convert.ToBase64String(key);
             return key;
         }
 

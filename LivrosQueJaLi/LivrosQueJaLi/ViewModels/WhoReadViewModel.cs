@@ -1,11 +1,11 @@
 ﻿using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.Views;
 using MvvmHelpers;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System;
-using System.Collections.Generic;
 
 namespace LivrosQueJaLi.ViewModels
 {
@@ -16,21 +16,8 @@ namespace LivrosQueJaLi.ViewModels
 
         public ObservableRangeCollection<User> Users { get; set; }
 
-        private bool _isEnabled;
-        public bool IsEnabled
-        {
-            get { return _isEnabled; }
-            set { SetProperty(ref _isEnabled, value); }
-        }
-
-        private string _lentOrSeeling;
-        public string LentOrSeeling
-        {
-            get { return _lentOrSeeling; }
-            set { SetProperty(ref _lentOrSeeling, value); }
-        }
-
-        public Command RefreshUsersCommand { get; set; }
+        public Command RefreshUsersCommand { get; }
+        public Command UserDetailCommand { get; }
 
         public WhoReadViewModel(Book pBook)
         {
@@ -39,6 +26,16 @@ namespace LivrosQueJaLi.ViewModels
             Users = new ObservableRangeCollection<User>();
 
             RefreshUsersCommand = new Command(ExecuteRefreshUsersCommand);
+            UserDetailCommand = new Command(ExecuteUserDetailCommand);
+        }
+
+        private void ExecuteUserDetailCommand(object obj)
+        {
+            if (obj == null)
+                return;
+
+            var user = obj as User;
+            NavigationToPush(new NegotiationPage(user, _book));
         }
 
         private void ExecuteRefreshUsersCommand() =>
@@ -52,13 +49,12 @@ namespace LivrosQueJaLi.ViewModels
             foreach (var dyn in usersDynamic)
             {
                 users.Add(dyn.User);
-                IsEnabled = dyn.UserBook.Lent || dyn.UserBook.Seeling;
 
                 if (dyn.UserBook.Lent)
-                    LentOrSeeling = "Empresto este livro.";
+                    dyn.User.LentOrSeeling = "Empresto este livro.";
 
                 if (dyn.UserBook.Seeling)
-                    LentOrSeeling = "Vendo este livro.";
+                    dyn.User.LentOrSeeling = "Vendo este livro.";
             }
 
             if (users != null)

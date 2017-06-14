@@ -11,18 +11,19 @@
         ItemsSource="{Binding Comments}"
         RefreshCommand="{Binding RefreshCommand}"
         IsPullToRefreshEnabled="True"
-        IsEnabled="False"
         ItemTappedCommand="{Binding CommentCommand}">
-
-        <ListView.IsEnabled>
+        
+        <!--IsEnabled="False"-->
+        <!--<ListView.IsEnabled>
             <OnPlatform x:TypeArguments="x:Boolean">
                 <OnPlatform.Android>True</OnPlatform.Android>
             </OnPlatform>
-        </ListView.IsEnabled>
+        </ListView.IsEnabled>-->
 
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell
+                    IsEnabled="False"
                     Text="{Binding CreatedAt}"
                     Detail="{Binding CommentText}"/>
             </DataTemplate>

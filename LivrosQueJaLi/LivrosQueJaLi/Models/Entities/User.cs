@@ -33,5 +33,8 @@ namespace LivrosQueJaLi.Models.Entities
 
         [JsonIgnore]
         public List<UserBook> UserBooks { get; set; }
+
+        [JsonIgnore]
+        public string LentOrSeeling { get; set; }
     }
 }

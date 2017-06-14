@@ -4,14 +4,15 @@
              x:Class="LivrosQueJaLi.Views.LoginPage"             
              Title="Livros Que Já Li">
 
-    <StackLayout
-        Padding="10"
+    <ScrollView
         VerticalOptions="CenterAndExpand"
         HorizontalOptions="CenterAndExpand">
-        <ActivityIndicator 
-            IsVisible="{Binding IsBusy}"
-            IsRunning="{Binding IsBusy}"/>
-        
+        <StackLayout
+            Padding="10">
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"/>
+
             <StackLayout
                 IsVisible="{Binding IsVisible}"
                 VerticalOptions="CenterAndExpand"
@@ -47,6 +48,7 @@
                     Image="ic_facebook.png"
                     HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
