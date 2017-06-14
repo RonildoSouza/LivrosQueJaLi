@@ -13,7 +13,6 @@ namespace EnviaEmailDLL.Modelo.Logica
         static ISymmetricKeyAlgorithmProvider aes = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
         static ICryptographicKey symetricKey = aes.CreateSymmetricKey(key);
 
-
         private static byte[] CreateDerivedKey(string encryptionKey, int keyLengthInBytes = 128, int iterations = 1000)
         {
             byte[] key = NetFxCrypto.DeriveBytes.GetBytes(encryptionKey, saltValueBytes, iterations, keyLengthInBytes);
