@@ -6,7 +6,9 @@
              Title="Pesquisa">
 
     <StackLayout Padding="10">
-        <Frame CornerRadius="10">
+        <Frame 
+            Padding="5"
+            CornerRadius="10">
             <SearchBar
                 Placeholder="Pesquise por: Titulo, ISBN, Autor, etc..."
                 SearchCommand="{Binding SearchCommand}"
@@ -27,6 +29,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ext:ListView>
-
     </StackLayout>
+    
 </ContentPage>

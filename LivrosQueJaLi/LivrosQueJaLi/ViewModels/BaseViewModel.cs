@@ -1,4 +1,5 @@
-﻿using LivrosQueJaLi.Helpers;
+﻿using LivrosQueJaLi.DAL;
+using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Views;
@@ -17,6 +18,8 @@ namespace LivrosQueJaLi.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        private UserBookDAL _userBookDAL;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableRangeCollection<Book> Books { get; private set; }
@@ -42,6 +45,7 @@ namespace LivrosQueJaLi.ViewModels
 
         public BaseViewModel()
         {
+            _userBookDAL = new UserBookDAL();
             Books = new ObservableRangeCollection<Book>();
             BookDetailCommand = new Command(ExecuteBookDetailCommand);
             PrivacyPolicyCommand = new Command(ExecutePrivacyPolicyCommand);
@@ -52,10 +56,15 @@ namespace LivrosQueJaLi.ViewModels
             throw new NotImplementedException();
         }
 
-        protected virtual void ExecuteBookDetailCommand(object obj)
+        protected virtual async void ExecuteBookDetailCommand(object obj)
         {
             var book = obj as Book;
-            NavigationToPush(new BookDetailTabbedPage(book));
+
+            if (obj != null)
+            {
+                var ub = await _userBookDAL.SelectUserBookByIds(User.Id, book.Id);
+                NavigationToPush(new BookDetailTabbedPage(book, ub?.IsRead ?? false));
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

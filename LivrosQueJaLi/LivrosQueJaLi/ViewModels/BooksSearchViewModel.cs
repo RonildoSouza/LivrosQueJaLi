@@ -39,7 +39,8 @@ namespace LivrosQueJaLi.ViewModels
             else
                 books = await _googleBooksClient.GetBooksAsync(TextSearch);
 
-            Books.ReplaceRange(books);
+            if (books != null)
+                Books.ReplaceRange(books);
         }
     }
 }

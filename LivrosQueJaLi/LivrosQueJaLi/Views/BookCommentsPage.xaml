@@ -11,21 +11,19 @@
         ItemsSource="{Binding Comments}"
         RefreshCommand="{Binding RefreshCommand}"
         IsPullToRefreshEnabled="True"
-        ItemTappedCommand="{Binding CommentCommand}">
-        
-        <!--IsEnabled="False"-->
-        <!--<ListView.IsEnabled>
-            <OnPlatform x:TypeArguments="x:Boolean">
-                <OnPlatform.Android>True</OnPlatform.Android>
-            </OnPlatform>
-        </ListView.IsEnabled>-->
-
+        HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell
-                    IsEnabled="False"
-                    Text="{Binding CreatedAt}"
-                    Detail="{Binding CommentText}"/>
+                <ViewCell>
+                    <StackLayout>
+                        <Label 
+                            Text="{Binding CreatedAt}"
+                            FontSize="Medium"/>
+                        <Editor
+                            Text="{Binding CommentText}"
+                            IsEnabled="False"/>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ext:ListView>

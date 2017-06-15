@@ -18,6 +18,8 @@ namespace LivrosQueJaLi.ViewModels
 
         public ObservableRangeCollection<Negotiation> Negotiations { get; set; }
 
+        public string Title { get; }
+
         private string _message = string.Empty;
         public string Message
         {
@@ -30,6 +32,8 @@ namespace LivrosQueJaLi.ViewModels
 
         public NegotiationViewModel(User pUser, Book pBook)
         {
+            Title = $"Negociação - {pBook.VolumeInfo.Title}";
+
             _user = pUser;
             _book = pBook;
 
@@ -50,10 +54,11 @@ namespace LivrosQueJaLi.ViewModels
                 _negotiationDAL.InsertOrUpdate(new Negotiation()
                 {
                     IdUserBook = userBook.Id,
-                    IdUserInterested = Constants.User.Id,
+                    IdUserInterested = User.Id,
                     Message = Message
                 });
 
+                Message = string.Empty;
                 RefreshNegotiationsCommand.Execute(null);
             }
             catch (Exception ex)

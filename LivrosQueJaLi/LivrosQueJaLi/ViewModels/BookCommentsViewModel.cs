@@ -15,7 +15,6 @@ namespace LivrosQueJaLi.ViewModels
         public ObservableRangeCollection<Comment> Comments { get; set; }
 
         public Command RefreshCommand { get; }
-        public Command CommentCommand { get; set; }
 
         public BookCommentsViewModel(Book pBook)
         {
@@ -24,13 +23,6 @@ namespace LivrosQueJaLi.ViewModels
             Comments = new ObservableRangeCollection<Comment>();
 
             RefreshCommand = new Command(ExecuteRefreshCommand);
-            CommentCommand = new Command(ExecuteCommentCommand);
-        }
-
-        private void ExecuteCommentCommand(object obj)
-        {
-            var comment = obj as Comment;
-            DisplayAlertShow(comment?.CreatedAt.ToString(), comment?.CommentText);
         }
 
         private void ExecuteRefreshCommand() => FillListView(FillObservableCollectionAsync);
@@ -38,7 +30,9 @@ namespace LivrosQueJaLi.ViewModels
         protected override async Task FillObservableCollectionAsync()
         {
             var comments = await _commentDAL.SelectBookCommentsAsync(_book.Id);
-            Comments.ReplaceRange(comments);
+
+            if (comments != null)
+                Comments.ReplaceRange(comments);
         }
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="ViewModels\BooksSearchViewModel.cs" />
     <Compile Include="ViewModels\BooksWishedViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\InterestedUsersViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NegotiationViewModel.cs" />
@@ -90,6 +91,9 @@
     </Compile>
     <Compile Include="Views\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InterestedUsersPage.xaml.cs">
+      <DependentUpon>InterestedUsersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -235,6 +239,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\NegotiationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InterestedUsersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

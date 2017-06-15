@@ -11,6 +11,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -53,6 +54,86 @@
 
             <Frame
                 Grid.Row="2"
+                Grid.ColumnSpan="2"
+                IsVisible="{Binding IsVisible}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label 
+                                Grid.Row="0" 
+                                Grid.Column="0"
+                                Text="Empresto"/>
+                            <Switch 
+                                Grid.Row="0" 
+                                Grid.Column="0" />
+
+                            <Label 
+                                Grid.Row="1" 
+                                Grid.Column="0"
+                                Text="Emprestado"/>
+                            <Switch 
+                                Grid.Row="1" 
+                                Grid.Column="0"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame 
+                        Grid.Row="0" 
+                        Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label 
+                                Grid.Row="0" 
+                                Grid.Column="0"
+                                Text="Vendo"/>
+                            <Switch 
+                                Grid.Row="0" 
+                                Grid.Column="0"/>
+
+                            <Label 
+                                Grid.Row="1" 
+                                Grid.Column="0"
+                                Text="Vendido"/>
+                            <Switch 
+                                Grid.Row="1" 
+                                Grid.Column="0"/>
+                        </Grid>
+                    </Frame>
+
+                    <Button
+                        Grid.Row="1" Grid.ColumnSpan="2"
+                        Text="Usuários Interessados"
+                        Command="{Binding InterestedUsersCommand}"
+                        Style="{StaticResource SettingButtons}"/>
+                </Grid>
+            </Frame>
+
+            <Frame
+                Grid.Row="3"
                 Grid.ColumnSpan="2">
                 <StackLayout>
                     <Label Text="{Binding Authors, StringFormat='Autores: {0}'}"/>
@@ -65,7 +146,7 @@
             </Frame>
 
             <Frame
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.ColumnSpan="2">
                 <Label
                     Text="{Binding Book.VolumeInfo.Description}"/>

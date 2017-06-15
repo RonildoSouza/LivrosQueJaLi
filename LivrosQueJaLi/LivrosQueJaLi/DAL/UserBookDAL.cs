@@ -1,5 +1,4 @@
-﻿using LivrosQueJaLi.Models;
-using LivrosQueJaLi.Models.Entities;
+﻿using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;

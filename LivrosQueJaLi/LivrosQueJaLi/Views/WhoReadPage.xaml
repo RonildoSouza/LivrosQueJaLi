@@ -15,7 +15,11 @@
         IsPullToRefreshEnabled="True">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
+                <ImageCell
+                    ImageSource="{Binding Photo}"
+                    Text="{Binding UserName}"
+                    Detail="{Binding LentOrSeeling}"/>
+                <!--<ViewCell>
                     <StackLayout                        
                         Orientation="Horizontal">
                         <Image Source="{Binding Photo}"/>
@@ -25,14 +29,14 @@
                             Orientation="Vertical">
                             <Label
                                 Text="{Binding UserName}"
-                                FontSize="Large"/>
+                                FontSize="Medium"/>
                             <Label
                                 Text="{Binding LentOrSeeling}"
                                 HorizontalTextAlignment="Center"
-                                FontSize="Medium"/>
+                                FontSize="Small"/>
                         </StackLayout>
                     </StackLayout>
-                </ViewCell>
+                </ViewCell>-->
             </DataTemplate>
         </ListView.ItemTemplate>
     </ext:ListView>

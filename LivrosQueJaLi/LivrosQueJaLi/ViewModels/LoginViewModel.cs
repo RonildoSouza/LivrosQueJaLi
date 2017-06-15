@@ -56,7 +56,7 @@ namespace LivrosQueJaLi.ViewModels
                     IsVisible = false;
                     _user = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
 
-                    var password = _user.Password ?? string.Empty;
+                    var password = _user?.Password ?? string.Empty;
                     var passwordDecrypt = Encryption.DecryptAes(password);
                     if (_user != null && Password.Equals((passwordDecrypt)) && ValidEmail(Email))
                         await NavigationToMainPage();

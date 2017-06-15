@@ -3,33 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LivrosQueJaLi.Views.NegotiationPage"
              xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
-             Title="Negociação"
+             Title="{Binding Title}"
              Padding="10">
 
-    <ext:ListView
-        x:Name="listView"
-        IsRefreshing="{Binding IsBusy}"
-        ItemsSource="{Binding Negotiations}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell
-                    Text="{Binding UserAndDate}"
-                    Detail="{Binding Message}"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        <ext:ListView.Footer>
-            <StackLayout
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand"
-                Orientation="Horizontal">
-                <Entry
-                    Text="{Binding Message}"
-                    Placeholder="Digite sua mensagem..."/>
+    <StackLayout Padding="10">
+        <ext:ListView
+            x:Name="listView"
+            IsRefreshing="{Binding IsBusy}"
+            ItemsSource="{Binding Negotiations}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label 
+                                Text="{Binding UserAndDate}"
+                                FontSize="Medium"/>
+                            <Editor
+                                Text="{Binding Message}"
+                                IsEnabled="False"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ext:ListView>
+
+        <Frame 
+            CornerRadius="10"
+            Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Editor         
+                    Grid.Row="0" Grid.Column="0"
+                    Text="{Binding Message}"/>
                 <Button
+                    Grid.Row="0" Grid.Column="1"
                     Text="OK"
-                    Command="{Binding SendMessageCommand}"/>
-            </StackLayout>
-        </ext:ListView.Footer>
-    </ext:ListView>
+                    Command="{Binding SendMessageCommand}"
+                    Style="{StaticResource SettingButtons}"/>
+            </Grid>
+        </Frame>
+    </StackLayout>
 
 </ContentPage>

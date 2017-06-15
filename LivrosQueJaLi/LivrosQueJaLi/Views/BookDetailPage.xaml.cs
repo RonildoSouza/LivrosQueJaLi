@@ -8,10 +8,10 @@ namespace LivrosQueJaLi.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookDetailPage : ContentPage
     {
-        public BookDetailPage(Book pBook)
+        public BookDetailPage(Book pBook, bool pIsVisible = false)
         {
             InitializeComponent();
-            BindingContext = new BookDetailViewModel(pBook);
+            BindingContext = new BookDetailViewModel(pBook, pIsVisible);
         }
     }   
 }

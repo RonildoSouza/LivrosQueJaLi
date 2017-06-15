@@ -34,16 +34,25 @@ namespace LivrosQueJaLi.ViewModels
 
         public Command ReadCommand { get; }
         public Command WishCommand { get; }
+        public Command InterestedUsersCommand { get; }
 
-        public BookDetailViewModel(Book pBook)
+        public BookDetailViewModel(Book pBook, bool pIsVisible = false)
         {
             Book = pBook;
+            IsVisible = pIsVisible;
             _price = $"{Book.SaleInfo.RetailPrice.CurrencyCode} {Book.SaleInfo.RetailPrice.Amount}";
             _userBookDAL = new UserBookDAL();
+
             ReadCommand = new Command(ExecuteReadCommand);
             WishCommand = new Command(ExecuteWishCommand);
+            InterestedUsersCommand = new Command(ExecuteInterestedUsersCommand);
 
             FillAuthors();
+        }
+
+        private void ExecuteInterestedUsersCommand(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private async void ExecuteReadCommand(object obj)

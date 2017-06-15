@@ -35,7 +35,11 @@ namespace LivrosQueJaLi.ViewModels
                 return;
 
             var user = obj as User;
-            NavigationToPush(new NegotiationPage(user, _book));
+
+            if (string.IsNullOrEmpty(user.LentOrSeeling))
+                DisplayAlertShow("Ops!", "Não empresto, não vendo\nou está emprestado ou já vendi!");
+            else
+                NavigationToPush(new NegotiationPage(user, _book));
         }
 
         private void ExecuteRefreshUsersCommand() =>
