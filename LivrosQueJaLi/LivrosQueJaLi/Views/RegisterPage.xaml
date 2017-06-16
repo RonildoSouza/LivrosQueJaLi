@@ -6,7 +6,7 @@
 
     <ScrollView
         VerticalOptions="CenterAndExpand"
-        HorizontalOptions="FillAndExpand">
+        HorizontalOptions="CenterAndExpand">
         <StackLayout
             Padding="10">
             <ActivityIndicator 
@@ -36,7 +36,7 @@
                     IsPassword="True"/>
 
                 <Button
-                    Text="Cadastre-se"
+                    Text="Cadastrar"
                     Command="{Binding RegisterCommand}"
                     FontSize="Large"
                     HorizontalOptions="FillAndExpand"/>
