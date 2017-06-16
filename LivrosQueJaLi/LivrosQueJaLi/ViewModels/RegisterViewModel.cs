@@ -3,6 +3,7 @@ using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Views;
+using Plugin.Connectivity;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -55,36 +56,41 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                if (ValidEmail(Email) && ValidPassword(Password, ConfirmPassword))
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    IsBusy = true;
-                    IsVisible = false;
-                    var user = new User()
+                    if (ValidEmail(Email) && ValidPassword(Password, ConfirmPassword))
                     {
-                        UserName = Name,
-                        Email = this.Email,
-                        Password = Encryption.EncryptAes(this.Password)
-                    };
+                        IsBusy = true;
+                        IsVisible = false;
+                        var user = new User()
+                        {
+                            UserName = Name,
+                            Email = this.Email,
+                            Password = Encryption.EncryptAes(this.Password)
+                        };
 
-                    var usr = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
-                    if (usr != null)
-                    {
-                        usr.Password = user.Password;
-                        user = usr;
-                        usr = null;
+                        var usr = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
+                        if (usr != null)
+                        {
+                            usr.Password = user.Password;
+                            user = usr;
+                            usr = null;
+                        }
+
+                        _userDAL.InsertOrUpdate(user);
+
+                        Constants.User = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
+                        IsBusy = false;
+
+                        await _navigation.PushAsync(new MainPage());
+                        RemovePageFromStack<RegisterPage>(_navigation);
                     }
-
-                    _userDAL.InsertOrUpdate(user);
-
-                    Constants.User = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
-                    IsBusy = false;
-
-                    await _navigation.PushAsync(new MainPage());
-                    RemovePageFromStack<RegisterPage>(_navigation);
+                    else
+                        DisplayAlertShow("Verifique", "\n\t* Se o Email está correto" +
+                            "\n\t* Ou informe as Senhas novamente pois podem estar diferentes!");
                 }
                 else
-                    DisplayAlertShow("Verifique", "\n\t* Se o Email está correto" +
-                        "\n\t* Ou informe as Senhas novamente pois podem estar diferentes!");
+                    DisplayAlertShow("Sem Acesso a Internet", "Falha de conexão com a internet!");
             }
             catch (Exception ex)
             {

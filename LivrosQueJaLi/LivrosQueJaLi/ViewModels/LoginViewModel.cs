@@ -4,6 +4,7 @@ using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;
 using LivrosQueJaLi.Views;
+using Plugin.Connectivity;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -50,25 +51,30 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    IsBusy = true;
-                    IsVisible = false;
-                    _user = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
-
-                    var password = _user?.Password ?? string.Empty;
-                    var passwordDecrypt = Encryption.DecryptAes(password);
-                    if (_user != null && Password.Equals((passwordDecrypt)) && ValidEmail(Email))
-                        await NavigationToMainPage();
-                    else
+                    if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
                     {
-                        IsBusy = false;
-                        IsVisible = true;
-                        DisplayAlertShow("Falha no Login", "Email e/ou Senha inválido!");
+                        IsBusy = true;
+                        IsVisible = false;
+                        _user = await _userDAL.SelectByIdFacebookOrEmailAsync(string.Empty, Email);
+
+                        var password = _user?.Password ?? string.Empty;
+                        var passwordDecrypt = Encryption.DecryptAes(password);
+                        if (_user != null && Password.Equals((passwordDecrypt)) && ValidEmail(Email))
+                            await NavigationToMainPage();
+                        else
+                        {
+                            IsBusy = false;
+                            IsVisible = true;
+                            DisplayAlertShow("Falha no Login", "Email e/ou Senha inválido!");
+                        }
                     }
+                    else
+                        DisplayAlertShow("Campos Vazios", "Email e/ou Senha não informados!");
                 }
                 else
-                    DisplayAlertShow("Campos Vazios", "Email e/ou Senha não informados!");
+                    DisplayAlertShow("Sem Acesso a Internet", "Falha de conexão com a internet!");
             }
             catch (Exception ex)
             {

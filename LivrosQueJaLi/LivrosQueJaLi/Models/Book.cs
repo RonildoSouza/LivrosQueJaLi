@@ -36,8 +36,8 @@
             get { return _description; }
             set
             {
-                var vl = value.Replace("<br>", "\n")
-                    .Replace("<p>", "\t");
+                var vl = value?.Replace("<br>", "\n")
+                    .Replace("<p>", "\t").Replace(@"<\p>", "");
                 _description = vl;
             }
         }
@@ -59,7 +59,13 @@
         }
 
         public ImageLinks ImageLinks { get; set; }
-        public string Language { get; set; }
+
+        private string _language;
+        public string Language
+        {
+            get { return _language?.ToUpper(); }
+            set { _language = value?.ToUpper(); }
+        }
     }
 
     public class ReadingModes
@@ -107,5 +113,4 @@
         public float Amount { get; set; }
         public string CurrencyCode { get; set; }
     }
-
 }

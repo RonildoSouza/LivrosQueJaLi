@@ -47,7 +47,6 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="Helpers\Switch.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
