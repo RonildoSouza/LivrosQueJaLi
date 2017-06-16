@@ -39,7 +39,7 @@ namespace LivrosQueJaLi.DAL
         public async Task<User> SelectByIdFacebookOrEmailAsync(string pIdFacebook, string pEmail)
         {
             var usr = await _azureClient.Table
-                    .Where(u => u.IdFacebook == pIdFacebook || u.Email == pEmail)
+                    .Where(u => u.Email == pEmail || u.IdFacebook == pIdFacebook)
                     ?.ToListAsync();
 
             return usr.FirstOrDefault();
