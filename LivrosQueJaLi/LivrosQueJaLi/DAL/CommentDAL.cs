@@ -17,7 +17,7 @@ namespace LivrosQueJaLi.DAL
         {
             try
             {
-                await _azureClient.Table.InsertAsync(obj);
+                await _azureClient.Table.InsertAsync(obj).ConfigureAwait(false);
             }
             catch (Exception e)
             {

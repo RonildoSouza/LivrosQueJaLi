@@ -26,9 +26,9 @@ namespace LivrosQueJaLi.DAL
             try
             {
                 if (string.IsNullOrEmpty(obj.Id))
-                    await _azureClient.Table.InsertAsync(obj);
+                    await _azureClient.Table.InsertAsync(obj).ConfigureAwait(false);
                 else
-                    await _azureClient.Table.UpdateAsync(obj);
+                    await _azureClient.Table.UpdateAsync(obj).ConfigureAwait(false);
             }
             catch (Exception e)
             {
