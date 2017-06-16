@@ -101,7 +101,7 @@ namespace LivrosQueJaLi.ViewModels
                     _user.Photo = $"https://graph.facebook.com/{_user.IdFacebook}/picture?type=normal&hc_location=ufi";
                     var userDB = await _userDAL.SelectByIdFacebookOrEmailAsync(_user.IdFacebook, _user.Email);
 
-                    if (userDB != null && string.IsNullOrEmpty(userDB.IdFacebook))
+                    if (userDB != null && !string.IsNullOrEmpty(userDB.IdFacebook))
                     {
                         _user.Id = userDB.Id;
                         _user.Password = userDB.Password;
