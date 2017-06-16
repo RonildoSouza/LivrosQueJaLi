@@ -62,7 +62,7 @@ namespace LivrosQueJaLi.DAL
         }
 
         public async Task<List<UserBook>> SelectAll() =>
-            await _azureClient.Table.ToListAsync();
+            await _azureClient.Table.ToListAsync().ConfigureAwait(false);
 
         public async void DeleteUserBook(UserBook pUserBook) =>
             await _azureClient.Table.DeleteAsync(pUserBook);

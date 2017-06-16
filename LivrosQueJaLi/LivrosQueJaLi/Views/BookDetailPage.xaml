@@ -4,6 +4,13 @@
              x:Class="LivrosQueJaLi.Views.BookDetailPage"
              Title="Detalhes">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Salvar Alterações"
+            Icon="ic_save_white_48dp.png"
+            Command="{Binding SaveChangesCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <Grid Padding="10">
             <Grid.RowDefinitions>
@@ -55,7 +62,8 @@
             <Frame
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                IsVisible="{Binding IsVisible}">
+                IsVisible="{Binding IsVisible}"
+                BackgroundColor="WhiteSmoke">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -66,7 +74,9 @@
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Row="0" Grid.Column="0">
+                    <Frame 
+                        Grid.Row="0" 
+                        Grid.Column="0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -79,18 +89,28 @@
                             <Label 
                                 Grid.Row="0" 
                                 Grid.Column="0"
-                                Text="Empresto"/>
+                                Text="Empresto"
+                                HorizontalOptions="Start"/>
                             <Switch 
+                                x:Name="SwitchLent"
                                 Grid.Row="0" 
-                                Grid.Column="0" />
+                                Grid.Column="0" 
+                                HorizontalOptions="End"
+                                IsToggled="{Binding UserBook.Lent}"
+                                Toggled="SwitchLent_Toggled"/>
 
                             <Label 
                                 Grid.Row="1" 
                                 Grid.Column="0"
-                                Text="Emprestado"/>
-                            <Switch 
+                                Text="Emprestado"
+                                HorizontalOptions="Start"/>
+                            <Switch  
+                                x:Name="SwitchBorrowed"
                                 Grid.Row="1" 
-                                Grid.Column="0"/>
+                                Grid.Column="0"
+                                HorizontalOptions="End"
+                                IsToggled="{Binding UserBook.Borrowed}"
+                                Toggled="SwitchBorrowed_Toggled"/>
                         </Grid>
                     </Frame>
 
@@ -109,24 +129,35 @@
                             <Label 
                                 Grid.Row="0" 
                                 Grid.Column="0"
-                                Text="Vendo"/>
-                            <Switch 
+                                Text="Vendo"
+                                HorizontalOptions="Start"/>
+                            <Switch  
+                                x:Name="SwitchSeeling"
                                 Grid.Row="0" 
-                                Grid.Column="0"/>
+                                Grid.Column="0"
+                                HorizontalOptions="End"
+                                IsToggled="{Binding UserBook.Seeling}"
+                                Toggled="SwitchSeeling_Toggled"/>
 
                             <Label 
                                 Grid.Row="1" 
                                 Grid.Column="0"
-                                Text="Vendido"/>
-                            <Switch 
+                                Text="Vendido"
+                                HorizontalOptions="Start"/>
+                            <Switch  
+                                x:Name="SwitchSold"
                                 Grid.Row="1" 
-                                Grid.Column="0"/>
+                                Grid.Column="0"
+                                HorizontalOptions="End"
+                                IsToggled="{Binding UserBook.Sold}"
+                                Toggled="SwitchSold_Toggled"/>
                         </Grid>
                     </Frame>
 
                     <Button
                         Grid.Row="1" Grid.ColumnSpan="2"
                         Text="Usuários Interessados"
+                        Image="ic_people_black_36dp.png"
                         Command="{Binding InterestedUsersCommand}"
                         Style="{StaticResource SettingButtons}"/>
                 </Grid>

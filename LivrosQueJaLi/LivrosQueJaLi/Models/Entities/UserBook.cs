@@ -18,8 +18,5 @@ namespace LivrosQueJaLi.Models.Entities
 
         [JsonIgnore]
         public Book Book { get; set; }
-
-        [JsonIgnore]
-        public List<Negotiation> Negotiations { get; set; }
     }
 }

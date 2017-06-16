@@ -13,8 +13,5 @@ namespace LivrosQueJaLi.Models.Entities
 
         [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
-
-        [JsonIgnore]
-        public string UserAndDate { get; set; }
     }
 }

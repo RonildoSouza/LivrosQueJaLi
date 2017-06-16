@@ -2,16 +2,16 @@
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
 using MvvmHelpers;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System;
-using LivrosQueJaLi.Helpers;
 
 namespace LivrosQueJaLi.ViewModels
 {
     public class NegotiationViewModel : BaseViewModel
     {
-        private User _user;
+        private string _idUserNegotiator;
+        private string _idUserInterested;
         private Book _book;
         private NegotiationDAL _negotiationDAL;
         private UserBookDAL _userBookDAL;
@@ -30,12 +30,13 @@ namespace LivrosQueJaLi.ViewModels
         public Command RefreshNegotiationsCommand { get; }
         public Command SendMessageCommand { get; }
 
-        public NegotiationViewModel(User pUser, Book pBook)
+        public NegotiationViewModel(string pIdUserNegotiator, Book pBook, string pIdUserInterested)
         {
-            Title = $"Negociação - {pBook.VolumeInfo.Title}";
+            Title = $"Negociação - [{pBook.VolumeInfo.Title}]";
 
-            _user = pUser;
+            _idUserNegotiator = pIdUserNegotiator;
             _book = pBook;
+            _idUserInterested = pIdUserInterested;
 
             _negotiationDAL = new NegotiationDAL();
             _userBookDAL = new UserBookDAL();
@@ -50,12 +51,12 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                var userBook = await _userBookDAL.SelectUserBookByIds(_user.Id, _book.Id);
+                var userBook = await _userBookDAL.SelectUserBookByIds(_idUserNegotiator, _book.Id);
                 _negotiationDAL.InsertOrUpdate(new Negotiation()
                 {
                     IdUserBook = userBook.Id,
-                    IdUserInterested = User.Id,
-                    Message = Message
+                    IdUserInterested = _idUserInterested,
+                    Message = $"{User.UserName} -> {Message}"
                 });
 
                 Message = string.Empty;
@@ -67,22 +68,15 @@ namespace LivrosQueJaLi.ViewModels
             }
         }
 
-        private void ExecuteRefreshNegotiationsCommand(object obj)
-        {
+        private void ExecuteRefreshNegotiationsCommand(object obj) =>
             FillListView(FillObservableCollectionAsync);
-        }
 
         protected async override Task FillObservableCollectionAsync()
         {
-            var ngts = await _negotiationDAL.SelectNegotiations(_user.Id, _book.Id);
+            var ngts = await _negotiationDAL.SelectNegotiations(_idUserNegotiator, _book.Id, _idUserInterested);
 
             if (ngts != null)
-            {
-                foreach (var ngt in ngts)
-                    ngt.UserAndDate = $"{User.UserName} - {ngt.CreatedAt}";
-
                 Negotiations.ReplaceRange(ngts);
-            }
         }
     }
 }

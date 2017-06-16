@@ -51,10 +51,8 @@ namespace LivrosQueJaLi.ViewModels
             PrivacyPolicyCommand = new Command(ExecutePrivacyPolicyCommand);
         }
 
-        private void ExecutePrivacyPolicyCommand()
-        {
-            throw new NotImplementedException();
-        }
+        private void ExecutePrivacyPolicyCommand() =>
+            NavigationToPush(new PrivacyPolicyWebPage());
 
         protected virtual async void ExecuteBookDetailCommand(object obj)
         {
@@ -62,8 +60,8 @@ namespace LivrosQueJaLi.ViewModels
 
             if (obj != null)
             {
-                var ub = await _userBookDAL.SelectUserBookByIds(User.Id, book.Id);
-                NavigationToPush(new BookDetailTabbedPage(book, ub?.IsRead ?? false));
+                var userBook = await _userBookDAL.SelectUserBookByIds(User.Id, book.Id);
+                NavigationToPush(new BookDetailTabbedPage(book, userBook));
             }
         }
 

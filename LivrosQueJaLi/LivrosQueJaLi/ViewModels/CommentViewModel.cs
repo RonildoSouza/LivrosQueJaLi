@@ -36,7 +36,7 @@ namespace LivrosQueJaLi.ViewModels
                 {
                     IdUserComment = User.Id,
                     IdBook = _book.Id,
-                    CommentText = EditorText
+                    CommentText = $"{User.UserName}\n{EditorText}"
                 };
 
                 _commentDAL.InsertOrUpdate(comment);

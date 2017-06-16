@@ -1,6 +1,7 @@
 ﻿using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Models;
 using LivrosQueJaLi.Models.Entities;
+using LivrosQueJaLi.Views;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,6 +17,13 @@ namespace LivrosQueJaLi.ViewModels
         {
             get { return _book; }
             set { SetProperty(ref _book, value); }
+        }
+
+        private UserBook _userBook;
+        public UserBook UserBook
+        {
+            get { return _userBook; }
+            set { SetProperty(ref _userBook, value); }
         }
 
         private string _authors = string.Empty;
@@ -35,11 +43,14 @@ namespace LivrosQueJaLi.ViewModels
         public Command ReadCommand { get; }
         public Command WishCommand { get; }
         public Command InterestedUsersCommand { get; }
+        public Command SaveChangesCommand { get; }
 
-        public BookDetailViewModel(Book pBook, bool pIsVisible = false)
+        public BookDetailViewModel(Book pBook, UserBook pUserBook)
         {
-            Book = pBook;
-            IsVisible = pIsVisible;
+            _book = pBook;
+            _userBook = pUserBook;
+
+            IsVisible = pUserBook?.IsRead ?? false;
             _price = $"{Book.SaleInfo.RetailPrice.CurrencyCode} {Book.SaleInfo.RetailPrice.Amount}";
             _userBookDAL = new UserBookDAL();
 
@@ -47,30 +58,41 @@ namespace LivrosQueJaLi.ViewModels
             WishCommand = new Command(ExecuteWishCommand);
             InterestedUsersCommand = new Command(ExecuteInterestedUsersCommand);
 
+            SaveChangesCommand = new Command(ExecuteSaveChangesCommand);
+
             FillAuthors();
+        }
+
+        private void ExecuteSaveChangesCommand(object obj)
+        {
+            _userBookDAL.InsertOrUpdate(UserBook);
+            DisplayAlertShow("Sucesso", "Alterações salvas com sucesso!");
         }
 
         private void ExecuteInterestedUsersCommand(object obj)
         {
-            throw new NotImplementedException();
+            if (_book != null)
+                NavigationToPush(new InterestedUsersPage(_book));
         }
 
         private async void ExecuteReadCommand(object obj)
         {
             try
             {
-                var userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
 
-                if (userBook == null)
-                    userBook = GetInstanceUserBook(true, false);
+                if (_userBook == null)
+                    _userBook = GetInstanceUserBook(true, false);
                 else
-                {
-                    userBook.IsRead = true;
-                    userBook.IsWish = false;
-                }
+                    SetUserBook(ref _userBook, true, false);
 
-                _userBookDAL.InsertOrUpdate(userBook);
+                _userBookDAL.InsertOrUpdate(_userBook);
+
+                if (string.IsNullOrEmpty(_userBook.Id))
+                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+
                 DisplayAlertShow("Lido", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de lidos!");
+                IsVisible = true;
             }
             catch (Exception)
             {
@@ -82,18 +104,20 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                var userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
 
-                if (userBook == null)
-                    userBook = GetInstanceUserBook(false, true);
+                if (_userBook == null)
+                    _userBook = GetInstanceUserBook(false, true);
                 else
-                {
-                    userBook.IsRead = false;
-                    userBook.IsWish = true;
-                }
+                    SetUserBook(ref _userBook, false, true);
 
-                _userBookDAL.InsertOrUpdate(userBook);
+                _userBookDAL.InsertOrUpdate(_userBook);
+
+                if (string.IsNullOrEmpty(_userBook.Id))
+                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+
                 DisplayAlertShow("Desejado", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de desejados!");
+                IsVisible = false;
             }
             catch (Exception)
             {
@@ -119,13 +143,26 @@ namespace LivrosQueJaLi.ViewModels
                 IdUser = User.Id,
                 IdBook = Book.Id,
                 IsRead = isRead,
-                IsWish = isWish
+                IsWish = isWish,
+                Lent = false,
+                Borrowed = false,
+                Seeling = false,
+                Sold = false
             };
         }
 
-        protected override Task FillObservableCollectionAsync()
+        private static void SetUserBook(ref UserBook userBook,
+            bool pIsRead, bool pIsWish, bool pLent = false, bool pBorrowd = false,
+            bool pSeeling = false, bool pSold = false)
         {
-            throw new NotImplementedException();
+            userBook.IsRead = pIsRead;
+            userBook.IsWish = pIsWish;
+            userBook.Lent = pLent;
+            userBook.Borrowed = pBorrowd;
+            userBook.Seeling = pSeeling;
+            userBook.Sold = pSold;
         }
+
+        protected override Task FillObservableCollectionAsync() => throw new NotImplementedException();
     }
 }

@@ -31,15 +31,15 @@ namespace LivrosQueJaLi.ViewModels
 
         private void ExecuteUserDetailCommand(object obj)
         {
-            if (obj == null)
-                return;
-
             var user = obj as User;
+
+            if (user == null || user?.Id == User.Id)
+                return;
 
             if (string.IsNullOrEmpty(user.LentOrSeeling))
                 DisplayAlertShow("Ops!", "Não empresto, não vendo\nou está emprestado ou já vendi!");
             else
-                NavigationToPush(new NegotiationPage(user, _book));
+                NavigationToPush(new NegotiationPage(user.Id, _book, User.Id));
         }
 
         private void ExecuteRefreshUsersCommand() =>

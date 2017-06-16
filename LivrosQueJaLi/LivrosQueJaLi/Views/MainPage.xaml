@@ -4,8 +4,12 @@
              x:Class="LivrosQueJaLi.Views.MainPage"
              xmlns:vws="clr-namespace:LivrosQueJaLi.Views"
              Title="{Binding User.UserName, StringFormat='Olá {0}!'}">
-
+    
     <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            Text="Política de Privacidade"
+            Order="Secondary"
+            Command="{Binding PrivacyPolicyCommand}"/>
         <ToolbarItem
             Text="Logout"
             IsDestructive="True"

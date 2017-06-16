@@ -1,10 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LivrosQueJaLi.Views.InterestedUsersPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="LivrosQueJaLi.Views.InterestedUsersPage"
+             xmlns:ext="clr-namespace:XFCustomControls.Ext;assembly=XFCustomControls.Ext"
+             Title="{Binding Title}"
+             Padding="10">
+
+    <ext:ListView
+        x:Name="listView"
+        IsRefreshing="{Binding IsBusy}"
+        ItemsSource="{Binding InterestedUsers}"
+        RefreshCommand="{Binding RefreshInterestedUsersCommand}"
+        ItemTappedCommand="{Binding InterestedUserDetailCommand}"
+        IsPullToRefreshEnabled="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell
+                    x:Name="imageCell"
+                    ImageSource="{Binding Photo}"
+                    Text="{Binding UserName}">
+                    <ImageCell.ContextActions>
+                        <MenuItem
+                            IsDestructive="True"
+                            Text="Apagar Negociação"    
+                            Command="{Binding DeleteCommand}"
+                            BindingContext="{Binding Source={x:Reference listView}, Path=BindingContext}"
+                            CommandParameter="{Binding Source={x:Reference imageCell}, Path=BindingContext}"/>
+                    </ImageCell.ContextActions>
+                </ImageCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ext:ListView>
 </ContentPage>

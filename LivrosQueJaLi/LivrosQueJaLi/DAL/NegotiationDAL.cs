@@ -2,8 +2,6 @@
 using LivrosQueJaLi.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrosQueJaLi.DAL
@@ -31,21 +29,20 @@ namespace LivrosQueJaLi.DAL
             }
         }
 
-        public async Task<List<Negotiation>> SelectNegotiations(string pIdUser, string pIdBook)
+        public async Task<List<Negotiation>> SelectNegotiations(string pIdUserNegotiator, string pIdBook, string pIdUserInterested)
         {
-            var userBook = await _userBookDAL.SelectUserBookByIds(pIdUser, pIdBook);
+            var userBook = await _userBookDAL.SelectUserBookByIds(pIdUserNegotiator, pIdBook);
             var negotiations = await _azureClient.Table
-                .Where(n => n.IdUserBook == userBook.Id)
+                .Where(n => n.IdUserBook == userBook.Id && n.IdUserInterested == pIdUserInterested)
                 .OrderBy(n => n.CreatedAt)?.ToListAsync();
 
             return negotiations;
         }
 
-        //public async Task<List<Negotiation>> SelectInterestedUsers(string pIdUser, string pIdBook)
-        //{
-        //    _azureClient.Table.Where(n => n.)
+        public async Task<List<Negotiation>> SelectAll() =>
+            await _azureClient.Table.ToListAsync().ConfigureAwait(false);
 
-        //    return null;
-        //}
+        public async void Delete(Negotiation pNegotiation) =>
+            await _azureClient.Table.DeleteAsync(pNegotiation).ConfigureAwait(false);
     }
 }

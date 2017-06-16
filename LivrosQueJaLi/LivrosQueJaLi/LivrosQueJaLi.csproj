@@ -47,6 +47,7 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\Switch.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NegotiationViewModel.cs" />
+    <Compile Include="ViewModels\PrivacyPolicyWebPage.xaml.cs">
+      <DependentUpon>PrivacyPolicyWebPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\WhoReadViewModel.cs" />
     <Compile Include="Views\BookCommentsPage.xaml.cs">
@@ -245,6 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\InterestedUsersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModels\PrivacyPolicyWebPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

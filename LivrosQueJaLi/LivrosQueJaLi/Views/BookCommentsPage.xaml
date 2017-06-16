@@ -19,9 +19,10 @@
                         <Label 
                             Text="{Binding CreatedAt}"
                             FontSize="Medium"/>
-                        <Editor
+                        <Label
                             Text="{Binding CommentText}"
-                            IsEnabled="False"/>
+                            FontSize="Medium"
+                            TextColor="Gray"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

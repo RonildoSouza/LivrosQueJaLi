@@ -47,6 +47,14 @@
                     FontSize="Large"
                     Image="ic_facebook.png"
                     HorizontalOptions="FillAndExpand"/>
+
+                <Button
+                    BorderColor="White"
+                    TextColor="Black"
+                    BackgroundColor="White"
+                    Text="Leia nossa política de privacidade"
+                    Command="{Binding PrivacyPolicyCommand}"
+                    FontSize="Small"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

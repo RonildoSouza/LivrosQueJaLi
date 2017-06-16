@@ -15,13 +15,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout Padding="0,10,0,10">
                             <Label 
-                                Text="{Binding UserAndDate}"
-                                FontSize="Medium"/>
-                            <Editor
+                                Text="{Binding CreatedAt}"
+                                FontSize="Small"/>
+                            <Label
                                 Text="{Binding Message}"
-                                IsEnabled="False"/>
+                                FontSize="Small"
+                                TextColor="Gray"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -33,21 +34,20 @@
             Padding="5">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80*"/>
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Editor         
                     Grid.Row="0" Grid.Column="0"
                     Text="{Binding Message}"/>
                 <Button
                     Grid.Row="0" Grid.Column="1"
-                    Text="OK"
-                    Command="{Binding SendMessageCommand}"
-                    Style="{StaticResource SettingButtons}"/>
+                    Image="ic_send_black_36dp.png"
+                    Command="{Binding SendMessageCommand}"/>
             </Grid>
         </Frame>
     </StackLayout>
