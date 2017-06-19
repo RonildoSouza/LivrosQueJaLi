@@ -51,7 +51,7 @@ namespace LivrosQueJaLi.ViewModels
             _userBook = pUserBook;
 
             IsVisible = pUserBook?.IsRead ?? false;
-            _price = $"{Book.SaleInfo.RetailPrice.CurrencyCode} {Book.SaleInfo.RetailPrice.Amount}";
+            _price = $"{_book.SaleInfo.RetailPrice.CurrencyCode} {_book.SaleInfo.RetailPrice.Amount}";
             _userBookDAL = new UserBookDAL();
 
             ReadCommand = new Command(ExecuteReadCommand);
@@ -79,7 +79,7 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, _book.Id);
 
                 if (_userBook == null)
                     _userBook = GetInstanceUserBook(true, false);
@@ -89,9 +89,9 @@ namespace LivrosQueJaLi.ViewModels
                 _userBookDAL.InsertOrUpdate(_userBook);
 
                 if (string.IsNullOrEmpty(_userBook.Id))
-                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, _book.Id);
 
-                DisplayAlertShow("Lido", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de lidos!");
+                DisplayAlertShow("Lido", $"Livro [{_book.VolumeInfo.Title}] adicionado a lista de lidos!");
                 IsVisible = true;
             }
             catch (Exception)
@@ -104,7 +104,7 @@ namespace LivrosQueJaLi.ViewModels
         {
             try
             {
-                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                _userBook = await _userBookDAL.SelectUserBookByIds(User.Id, _book.Id);
 
                 if (_userBook == null)
                     _userBook = GetInstanceUserBook(false, true);
@@ -114,9 +114,9 @@ namespace LivrosQueJaLi.ViewModels
                 _userBookDAL.InsertOrUpdate(_userBook);
 
                 if (string.IsNullOrEmpty(_userBook.Id))
-                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, Book.Id);
+                    UserBook = await _userBookDAL.SelectUserBookByIds(User.Id, _book.Id);
 
-                DisplayAlertShow("Desejado", $"Livro [{Book.VolumeInfo.Title}] adicionado a lista de desejados!");
+                DisplayAlertShow("Desejado", $"Livro [{_book.VolumeInfo.Title}] adicionado a lista de desejados!");
                 IsVisible = false;
             }
             catch (Exception)
@@ -127,12 +127,12 @@ namespace LivrosQueJaLi.ViewModels
 
         private void FillAuthors()
         {
-            if (Book.VolumeInfo.Authors != null)
+            if (_book.VolumeInfo.Authors != null)
             {
-                for (int i = 0; i < Book.VolumeInfo.Authors.Length; i++)
+                for (int i = 0; i < _book.VolumeInfo.Authors.Length; i++)
                     Authors +=
-                        (Book.VolumeInfo.Authors.Length - i > 1)
-                        ? $"{Book.VolumeInfo.Authors[i]}, " : Book.VolumeInfo.Authors[i];
+                        (_book.VolumeInfo.Authors.Length - i > 1)
+                        ? $"{_book.VolumeInfo.Authors[i]}, " : _book.VolumeInfo.Authors[i];
             }
         }
 
@@ -141,7 +141,7 @@ namespace LivrosQueJaLi.ViewModels
             return new UserBook()
             {
                 IdUser = User.Id,
-                IdBook = Book.Id,
+                IdBook = _book.Id,
                 IsRead = isRead,
                 IsWish = isWish,
                 Lent = false,

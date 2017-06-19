@@ -19,15 +19,12 @@ namespace LivrosQueJaLi.ViewModels
 
         public BookDetailTabbedViewModel(Book pBook)
         {
-            Book = pBook;
+            _book = pBook;
             CommentCommand = new Command(ExecuteCommentCommand);
         }
 
-        private void ExecuteCommentCommand(object obj) => NavigationToPush(new CommentPage(Book));
+        private void ExecuteCommentCommand() => NavigationToPush(new CommentPage(_book));
 
-        protected override Task FillObservableCollectionAsync()
-        {
-            throw new NotImplementedException();
-        }
+        protected override Task FillObservableCollectionAsync() => throw new NotImplementedException();
     }
 }

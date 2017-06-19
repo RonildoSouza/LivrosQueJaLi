@@ -1,5 +1,4 @@
-﻿using EnviaEmailDLL.Modelo.Logica;
-using LivrosQueJaLi.DAL;
+﻿using LivrosQueJaLi.DAL;
 using LivrosQueJaLi.Helpers;
 using LivrosQueJaLi.Models.Entities;
 using LivrosQueJaLi.Services;

@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using static PCLCrypto.WinRTCrypto;
 
-namespace EnviaEmailDLL.Modelo.Logica
+namespace LivrosQueJaLi.Helpers
 {
     public static class Encryption
     {
